@@ -11,6 +11,7 @@ eval_expr <- function(expr) {
 #' @export
 map_records <- function(records, mapping_file) {
   mapping_f_name <- system.file('mapping', mapping_file, package = 'xva')
+  records[is.na(records)]<-""
   headers <- names(records)
 
   # Load mapping tab-delim file:
