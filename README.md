@@ -43,7 +43,7 @@ write.table(
   qmethod = "escape",
   sep = ","
 )
-#map by providing a mapping file (here using the package-provided tariff2 mapping
+#map by providing a mapping file (here using the package-provided tariff2 mapping)
 mapping_file <- system.file('mapping', 'tariff2_mapping.txt', package = 'xva')
 output_data <- map_records(records, mapping_file)
 output_f_name <- "output_for_smartva.csv"
