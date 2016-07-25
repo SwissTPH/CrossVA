@@ -2,11 +2,11 @@
 
 **Description** 	
 
-R-Converter for converting verbal autopsy records collected using the WHO VA 2014 instrument to be used as input for different coding algorithms. 
+R-Converter for converting verbal autopsy records collected using the WHO VA 2016 instrument to be used as input for different coding algorithms. 
 
 **Input**		
-- CSV file containing submissions of the 2014 WHO VA questionnaire (exported from ODK Aggregate)
-- One or more mapping files (text file, semi-colon as column separator). Minimal content: the first columns contains the names of all variables needed by the coding algorithm (called "target variables" here). The second column contains the mapping to each target variable, as a valid R expression. Expressions can be functions of zero or more variables of the WHO VA instrument, or any of the preceding target variable. In addition to standard R functions, a small set of convenience functions is provided in xda.R.
+- CSV file containing submissions of the 2016 WHO VA questionnaire (exported from ODKAggregate using ODKBriefcase)
+- A mapping files (tab-delimited text file). Minimal content: the first columns contains the names of all variables needed by the coding algorithm (called "target variables" here). The second column contains the mapping to each target variable, as a valid R expression. Expressions can be functions of zero or more variables of the WHO VA instrument, or any of the preceding target variable. In addition to standard R functions, a small set of convenience functions is provided in utils.R. The release comes with currently two mapping files, one for interVA4, and one for tariff2).
 
 **Output**		
 A CSV file intended for processing by a coding algorithm.
@@ -25,3 +25,4 @@ devtools::install_github("SwissTPH/xva")
 ```
 or download and install from [here https://github.com/SwissTPH/xva/releases](https://github.com/SwissTPH/xva/releases)
 
+Use your own VA records, or the [sythetic sample data set included in the package](https://github.com/SwissTPH/xva/raw/master/inst/sample/who_va_output.csv) for testing.
