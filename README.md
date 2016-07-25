@@ -23,3 +23,5 @@ For testing purposes, install via
 install.packages("devtools")
 devtools::install_github("SwissTPH/xva")
 ```
+or download and install from [here https://github.com/SwissTPH/xva/releases](https://github.com/SwissTPH/xva/releases)
+
