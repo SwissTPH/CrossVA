@@ -7,5 +7,6 @@ Description: Enables transformation of Verbal Autopsy data collected with the WH
   for automated coding of Cause of Death using different computer algorithms. Currently supports InterVA4,
   Tariff 2, and user-supplied mappings.
 License: GPL-2
+Depends: R (>= 3.2.0)
 LazyData: TRUE
 RoxygenNote: 5.0.1

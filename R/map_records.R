@@ -1,3 +1,4 @@
+xda_env <- new.env()
 #' Map VA records to coding algorithm.
 #'
 #' \code{map_records} transform data collected with the WHO VA instrument
@@ -46,14 +47,14 @@ map_records <- function(records, mapping, csv_outfile = "") {
   output_data <- data.frame(matrix(ncol = target_n))
   colnames(output_data) <- map_def[, 1]
   for (rec_count in 1:nrow(records)) {
-    assign("rec_id", rec_count, envir = parent.frame())
+    assign("rec_id", rec_count, envir = xda_env)
     record <- records[rec_count,]
     for (j in 1:length(headers)) {
       value <- as.character(record[1, j])
       header <- headers[j]
       header_cleaned <-
         regmatches(header, regexpr("[^\\.]*$", header))
-      assign(header_cleaned, value, envir = parent.frame())
+      assign(header_cleaned, value, envir = xda_env)
     }
     current_data <- data.frame(matrix(ncol = target_n))
     for (i in 1:target_n) {
@@ -64,7 +65,7 @@ map_records <- function(records, mapping, csv_outfile = "") {
       name <-
         regmatches(target_var, regexpr("[^\\-]*$", target_var))
       name <- paste("t_", name, sep = "")
-      assign(name, current_data[i][[1]], envir = parent.frame())
+      assign(name, current_data[i][[1]], envir = xda_env)
     }
     output_data[rec_count,] <- current_data
   }

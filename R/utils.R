@@ -4,7 +4,7 @@ eval_expr <- function(expr) {
     return("")
   }
   value <- ""
-  value <- tryCatch(eval(parse(text = expr)))
+  value <- tryCatch(eval(parse(text = expr), envir = xda_env))
   return(value)
 }
 
@@ -35,7 +35,7 @@ multi_select_contains <- function(what, who_id) {
 yes_to_code <- function(qlist, clist, default) {
   code <- ""
   for (i in 1:length(qlist)) {
-    if (get(qlist[i]) == "yes") {
+    if (get(qlist[i], envir = xda_env) == "yes") {
       code <- paste(code, clist[i])
     }
   }
@@ -48,11 +48,11 @@ yes_to_code <- function(qlist, clist, default) {
 
 # from_list: upper limits of range to_list: codes to map to
 range_to_code <- function(from_list, to_list, default, who_id) {
-  if (get(who_id) == "") {
+  if (get(who_id, envir = xda_env) == "") {
     return("")
   }
   code <- default
-  value <- as.numeric(get(who_id))
+  value <- as.numeric(get(who_id, envir = xda_env))
   for (i in 1:length(to_list)) {
     if (value > from_list[i] && value <= from_list[i + 1]) {
       code <- to_list[i]
@@ -64,7 +64,7 @@ range_to_code <- function(from_list, to_list, default, who_id) {
 #map between sets of codes
 map_code <- function(from_list, to_list, who_id) {
   code <- ""
-  value <- get(who_id)
+  value <- get(who_id, envir = xda_env)
   for (i in 1:length(from_list)) {
     if (from_list[i] == value) {
       code <- to_list[i]
