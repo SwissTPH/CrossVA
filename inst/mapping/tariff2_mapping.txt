@@ -107,7 +107,7 @@ adultModule-adult2-adult_2_14	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10
 adultModule-adult2-adult_2_15	ifelse(t_adult_2_14==1,4,'')	add select one prompt using dayNoAnswer	For how many days did the ulcer ooze pus?	
 adultModule-adult2-adult_2_15a	Id10232	add integer prompt	For how many days did the ulcer ooze pus? [specify units]	
 adultModule-adult2-adult_2_21	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10265')	add select one prompt using yesno	Did ${gen_5_0} have yellow discoloration of the eyes?	
-adultModule-adult2-adult_2_22	ifelse (t_adult_2_2==1,14,'')	add select one prompt using monthDayNoAnswer	For how long did ${gen_5_0} have the yellow discoloration?	
+adultModule-adult2-adult_2_22	ifelse (t_adult_2_2==1,4,'')	add select one prompt using monthDayNoAnswer	For how long did ${gen_5_0} have the yellow discoloration?	
 adultModule-adult2-adult_2_22a	Id10266	add integer prompt	Number of days	
 adultModule-adult2-adult_2_22b	""""""	add integer prompt	Number of months	
 adultModule-adult2-adult_2_25	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10247')	add select one prompt using yesno	Did ${gen_5_0} have puffiness of the face?	
