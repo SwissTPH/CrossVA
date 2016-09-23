@@ -99,15 +99,18 @@ exp_def <- function(expr, default) {
 
 # get year from a date string, slightly more safe than just substringing
 get_year <- function(date_string) {
-  return (lubridate::year(lubridate::parse_date_time(c(date_string), c("dmY"))[1]))
+  year <- lubridate::year(lubridate::parse_date_time(c(date_string), c("dmY"), quiet = TRUE)[1])
+  return (ifelse(is.na(year), "", year))
 }
 
 # get (numeric) month from a date string, slightly more safe than just substringing
 get_month <- function(date_string) {
-  return (lubridate::month(lubridate::parse_date_time(c(date_string), c("dmY"))[1]))
+  month <- lubridate::month(lubridate::parse_date_time(c(date_string), c("dmY"), quiet = TRUE)[1])
+  return (ifelse(is.na(month), "", month))
 }
 
 # get day from a date string, slightly more safe than just substringing
 get_day <- function(date_string) {
-  return (lubridate::day(lubridate::parse_date_time(c(date_string), c("dmY"))[1]))
+  day <- lubridate::day(lubridate::parse_date_time(c(date_string), c("dmY"), quiet = TRUE)[1])
+  return (ifelse(is.na(day), "", day))
 }

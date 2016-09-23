@@ -1,7 +1,7 @@
 target variable	mapping	type	caption or calculation	Note
 SubmissionDate	SubmissionDate			
-interviewstarttime	paste(substr(Id10012, 0, 10),substr(Id10011, 0, 8))	get start time	Start time of interview	
-interviewdate	substr(Id10012,0,10)	get today	Date of interview	
+interviewstarttime	paste(Id10012, Id10011)	get start time	Start time of interview	
+interviewdate	paste(get_day(Id10012), get_month(Id10012), get_year(Id10012), sep='.')	get today	Date of interview	
 Generalmodule-gen_1_1	""""""	add note prompt	"This instrument was developed by the Population Health Metrics Research Consortium.
 
 Swipe to begin the General Information Module."	
@@ -15,15 +15,15 @@ Generalmodule-general3-gen_3_1	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id1
 Generalmodule-general3-qconsentCheck-gen_3_2	""""""	add note prompt	Thank the respondent for his/her time and end the interview.	
 gen_5_a	""""""	add note prompt	Questions on the Deceased Section	
 general5-gen_5_0	paste(Id10017,Id10018)	add text prompt	What was the name of the deceased?	
-general5-birthDate-gen_5_1a	exp_def(substr(Id10021,7,10),9999)	add integer prompt	What year was the deceased born?	
-general5-birthDate-gen_5_1b	exp_def(substr(Id10021,4,5),99)	add integer prompt	What month was the deceased born?	
-general5-birthDate-gen_5_1c	exp_def(substr(Id10021,1,2),99)	add integer prompt	What day of the month was the deceased born?	
-general5-birthDate-birthday	"paste(t_gen_5_1a,'-',t_gen_5_1b,'-',t_gen_5_1c,sep="""")"	calculate	concat(${gen_5_1a},'-', ${gen_5_1b},'-', ${gen_5_1c})	
+general5-birthDate-gen_5_1a	exp_def(get_year(Id10021),9999)	add integer prompt	What year was the deceased born?	
+general5-birthDate-gen_5_1b	exp_def(get_month(Id10021),99)	add integer prompt	What month was the deceased born?	
+general5-birthDate-gen_5_1c	exp_def(get_day(Id10021),99)	add integer prompt	What day of the month was the deceased born?	
+general5-birthDate-birthday	"paste(t_gen_5_1a, t_gen_5_1b, t_gen_5_1c,sep=""-"")"	calculate	concat(${gen_5_1a},'-', ${gen_5_1b},'-', ${gen_5_1c})	
 general5-birthDate-wrongbirthday	""""""	add note prompt	Sorry, the birthday provided is past today's date.  Please go back and check the date.	
 general5-gen_5_2	map_code(c('male','female'),c(1,2),'Id10019')	add select one prompt using sex	What was the sex of the deceased?	
-general5-deathDate-gen_5_3a	exp_def(substr(Id10023,7,10),999)	add integer prompt	What year did the deceased die?	
-general5-deathDate-gen_5_3b	exp_def(substr(Id10023,4,5),99)	add integer prompt	What month did the deceased die?	
-general5-deathDate-gen_5_3c	exp_def(substr(Id10023,1,2),99)	add integer prompt	What day of the month did the deceased die?	
+general5-deathDate-gen_5_3a	exp_def(get_year(Id10023),9999)	add integer prompt	What year did the deceased die?	
+general5-deathDate-gen_5_3b	exp_def(get_month(Id10023),99)	add integer prompt	What month did the deceased die?	
+general5-deathDate-gen_5_3c	exp_def(get_day(Id10023),99)	add integer prompt	What day of the month did the deceased die?	
 general5-lastknownAge-gen_5_4	range_to_code(c(0,27,365,999999),c(4,2,1),9,'ageInDays')	add select one prompt using yearMonthDayNoAnswer	What was the last known age of the deceased?	
 general5-lastknownAge-gen_5_4a	ifelse (t_gen_5_4=='1', ageInYears,'')	add integer prompt	Years - if one year or older	
 general5-lastknownAge-gen_5_4b	ifelse (t_gen_5_4=='2', ageInMonths,'')	add integer prompt	Months - if less than one year	
@@ -62,9 +62,9 @@ general5-neonate	ifelse((t_gen_5_4== '2' && t_gen_5_4b<= 1) || (t_gen_5_4== '4' 
 gen_6_a	""""""	add note prompt	Questions on the Notification of Death Section	
 general6-gen_6_1	""""""	add select one prompt using yesno	Has this death been registered?	
 general6-registerGen-gen_6_2a	""""""	add note prompt	Record the date of registration	
-general6-registerGen-gen_6_2b	substr(Id10023,7,10)	add integer prompt	Year	
-general6-registerGen-gen_6_2c	substr(Id10023,4,5)	add integer prompt	Month	
-general6-registerGen-gen_6_2d	substr(Id10023,1,2)	add integer prompt	Day of the month	
+general6-registerGen-gen_6_2b	get_year(Id10023)	add integer prompt	Year	
+general6-registerGen-gen_6_2c	get_month(Id10023)	add integer prompt	Month	
+general6-registerGen-gen_6_2d	get_day(Id10023)	add integer prompt	Day of the month	
 general6-gen_6_3	Id10070	add integer prompt	Record the registration number:	
 general6-gen_6_4	""""""	add select one prompt using yesno	Has this death been notified?	
 general6-gen_6_5	""""""	add integer prompt	Record the notification number:	
@@ -206,17 +206,17 @@ adult6-adult_6_4	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10437')	add sel
 adult6-adult_6_5	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10438')	add select one prompt using yesno	Can I see the health records? 	
 adult6-qhealthrecordsAdult-adult_6_6	""""""	add select multiple prompt using dates	Are the dates known for the two most recent visits and the last note? (Mark all that apply)	
 adult6-qhealthrecordsAdult-recent1Adult-adult_6_6a	""""""	add note prompt	Most recent visit	
-adult6-qhealthrecordsAdult-recent1Adult-adult_6_6b	substr(Id10439,7,10)	add integer prompt	Year	
-adult6-qhealthrecordsAdult-recent1Adult-adult_6_6c	substr(Id10439,4,5)	add integer prompt	Month	
-adult6-qhealthrecordsAdult-recent1Adult-adult_6_6d	substr(Id10439,1,2)	add integer prompt	Day of the month	
+adult6-qhealthrecordsAdult-recent1Adult-adult_6_6b	get_year(Id10439)	add integer prompt	Year	
+adult6-qhealthrecordsAdult-recent1Adult-adult_6_6c	get_month(Id10439)	add integer prompt	Month	
+adult6-qhealthrecordsAdult-recent1Adult-adult_6_6d	get_day(Id10439)	add integer prompt	Day of the month	
 adult6-qhealthrecordsAdult-recent2Adult-adult_6_6e	""""""	add note prompt	Second most recent visit	
-adult6-qhealthrecordsAdult-recent2Adult-adult_6_6f	substr(Id10440,7,10)	add integer prompt	Year	
-adult6-qhealthrecordsAdult-recent2Adult-adult_6_6g	substr(Id10440,4,5)	add integer prompt	Month	
-adult6-qhealthrecordsAdult-recent2Adult-adult_6_6h	substr(Id10440,1,2)	add integer prompt	Day of the month	
+adult6-qhealthrecordsAdult-recent2Adult-adult_6_6f	get_year(Id10440)	add integer prompt	Year	
+adult6-qhealthrecordsAdult-recent2Adult-adult_6_6g	get_month(Id10440)	add integer prompt	Month	
+adult6-qhealthrecordsAdult-recent2Adult-adult_6_6h	get_day(Id10440)	add integer prompt	Day of the month	
 adult6-qhealthrecordsAdult-lastNoteAdult-adult_6_7	""""""	add note prompt	Record the date of the last note	
-adult6-qhealthrecordsAdult-lastNoteAdult-adult_6_7a	substr(Id10441,7,10)	add integer prompt	Year	
-adult6-qhealthrecordsAdult-lastNoteAdult-adult_6_7b	substr(Id10441,4,5)	add integer prompt	Month	
-adult6-qhealthrecordsAdult-lastNoteAdult-adult_6_7c	substr(Id10441,1,2)	add integer prompt	Day of the month	
+adult6-qhealthrecordsAdult-lastNoteAdult-adult_6_7a	get_year(Id10441)	add integer prompt	Year	
+adult6-qhealthrecordsAdult-lastNoteAdult-adult_6_7b	get_month(Id10441)	add integer prompt	Month	
+adult6-qhealthrecordsAdult-lastNoteAdult-adult_6_7c	get_day(Id10441)	add integer prompt	Day of the month	
 adult6-qhealthrecordsAdult-lastNoteAdult-adult_6_8	Id10444	add text prompt	Transcribe the note:	
 adult6-adult_6_9	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10462')	add select one prompt using yesno	Was a death certificate issued?	
 adult6-adult_6_10	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10463')	add select one prompt using yesnorefuse	Can I see the death certificate? 	
@@ -348,23 +348,23 @@ Child5-child_5_4	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10437')	add sel
 Child5-child_5_5	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10438')	add select one prompt using yesno	Can I see the health records? 	
 Child5-child_5_6	""""""	add select multiple prompt using dates	Are the dates known for the two most recent visits and the last note? (Mark all that apply)	
 Child5-recent1Child-child_5_6a	""""""	add note prompt	Record the date of the most recent visit	
-Child5-recent1Child-child_5_6b	substr(Id10439,7,10)	add integer prompt	Year	
-Child5-recent1Child-child_5_6c	substr(Id10439,4,5)	add integer prompt	Month	
-Child5-recent1Child-child_5_6d	substr(Id10439,1,2)	add integer prompt	Day of the month	
+Child5-recent1Child-child_5_6b	get_year(Id10439)	add integer prompt	Year	
+Child5-recent1Child-child_5_6c	get_month(Id10439)	add integer prompt	Month	
+Child5-recent1Child-child_5_6d	get_day(Id10439)	add integer prompt	Day of the month	
 Child5-child_5_6e	ifelse (t_child_5_6a, 2, '')	add select one prompt using weightNoAnswer	Record the weight on the most recent visit	
 Child5-child_5_6f	""""""	add integer prompt	Grams	
 Child5-child_5_6g	Id10442	add integer prompt	Kilograms	
 Child5-recent2Child-child_5_7a	""""""	add note prompt	Record the date of the second most recent visit	
-Child5-recent2Child-child_5_7b	substr(Id10440,7,10)	add integer prompt	Year	
-Child5-recent2Child-child_5_7c	substr(Id10440,4,5)	add integer prompt	Month	
-Child5-recent2Child-child_5_7d	substr(Id10440,1,2)	add integer prompt	Day of the month	
+Child5-recent2Child-child_5_7b	get_year(Id10440)	add integer prompt	Year	
+Child5-recent2Child-child_5_7c	get_month(Id10440)	add integer prompt	Month	
+Child5-recent2Child-child_5_7d	get_day(Id10440)	add integer prompt	Day of the month	
 Child5-child_5_7e	ifelse (t_child_5_7a, 2, '')	add select one prompt using weightNoAnswer	Record the weight on the second most recent visit	
 Child5-child_5_7f	""""""	add integer prompt	Grams	
 Child5-child_5_7g	Id10443	add integer prompt	Kilograms	
 Child5-lastNoteChild-child_5_8	""""""	add note prompt	Record the date of the last note	
-Child5-lastNoteChild-child_5_8a	substr(Id10441,7,10)	add integer prompt	Year	
-Child5-lastNoteChild-child_5_8b	substr(Id10441,4,5)	add integer prompt	Month	
-Child5-lastNoteChild-child_5_8c	substr(Id10441,1,2)	add integer prompt	Day of the month	
+Child5-lastNoteChild-child_5_8a	get_year(Id10441)	add integer prompt	Year	
+Child5-lastNoteChild-child_5_8b	get_month(Id10441)	add integer prompt	Month	
+Child5-lastNoteChild-child_5_8c	get_day(Id10441)	add integer prompt	Day of the month	
 Child5-child_5_9	Id10444	add text prompt	Transcribe the note:	
 Child5-qDeathCertsChild-child_5_10	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10462')	add select one prompt using yesno	Was a death certificate issued?	
 Child5-qDeathCertsChild-child_5_11	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10463')	add select one prompt using yesnorefuse	Can I see the death certificate? 	
