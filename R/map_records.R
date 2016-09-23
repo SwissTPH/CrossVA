@@ -38,7 +38,7 @@ map_records <- function(records, mapping, csv_outfile = "") {
   }else{
     mapping_f_name <- mapping
   }
-  map_def <- read.delim(mapping_f_name)
+  map_def <- utils::read.delim(mapping_f_name)
   records[is.na(records)] <- ""
   headers <- names(records)
 
@@ -70,7 +70,7 @@ map_records <- function(records, mapping, csv_outfile = "") {
     output_data[rec_count,] <- current_data
   }
   if (csv_outfile != "") {
-    write.table(
+    utils::write.table(
       output_data,
       csv_outfile,
       row.names = FALSE,
@@ -81,3 +81,53 @@ map_records <- function(records, mapping, csv_outfile = "") {
   }
   return(output_data)
 }
+
+#' Map VA records to InterVA4.
+#'
+#' \code{map_records} transform data collected with the WHO VA instrument
+#'   for coding with the InterVA4 algorithm.
+#'
+#' @param records A dataframe, obtained from reading an ODKBriefcase
+#'   export of records collected with the WHO questionnaire.
+#' @param csv_outfile Path to a file to write transformed data to.
+#'   Defaults to empty string, in which case no file is written.
+#' @return A dataframe, with the VA records mapped to the variables required
+#'   by InterVA4.
+#'
+#' @examples
+#' \dontrun{
+#' record_f_name <- system.file('sample', 'who_va_output.csv', package = 'xva')
+#' records <- read.csv(record_f_name)
+#' output_data <- map_records_interva4(records)
+#' }
+#' @references http://www.interva.net/
+#' TODO: enable export
+map_records_interva4 <- function(records, csv_outfile = "" ){
+  return (map_records(records,"interva4_mapping.txt", csv_outfile))
+}
+
+#' Map VA records to Tariff 2.
+#'
+#' \code{map_records} transform data collected with the WHO VA instrument
+#'   for coding with the Tariff 2 algorithm.
+#'
+#' @param records A dataframe, obtained from reading an ODKBriefcase
+#'   export of records collected with the WHO questionnaire.
+#' @param csv_outfile Path to a file to write transformed data to.
+#'   Defaults to empty string, in which case no file is written.
+#' @return A dataframe, with the VA records mapped to the variables required
+#'   by Tariff 2.
+#'
+#' @examples
+#' \dontrun{
+#' records <- read.csv('who_va_output.csv')
+#' output_data <- map_records_tariff2(records)
+#' }
+#'
+#' @references James, S. L., Flaxman, A. D., Murray, C. J., & Population Health Metrics Research Consortium. (2011). \emph{Performance of the Tariff Method: validation of a simple additive algorithm for analysis of verbal autopsies.} \emph{Population Health Metrics, 9(1), 1-16.}
+#' TODO: enable export
+
+map_records_tariff2 <- function(records, csv_outfile = "" ){
+  return (map_records(records,"tariff2_mapping.txt", csv_outfile))
+}
+
