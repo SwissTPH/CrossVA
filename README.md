@@ -6,7 +6,7 @@ CrossVA (xva) is an R package for transforming verbal autopsy records collected 
 
 **Input**		
 - CSV file containing submissions of the 2016 WHO VA questionnaire (exported from ODKAggregate using ODKBriefcase)
-- A mapping files (tab-delimited text file). Minimal content: the first columns contains the names of all variables needed by the coding algorithm (called "target variables" here). The second column contains the mapping to each target variable, as a valid R expression. Expressions can be functions of zero or more variables of the WHO VA instrument, or any of the preceding target variable. In addition to standard R functions, a small set of convenience functions is provided in utils.R. The release comes with currently two mapping files, one for interVA4, and one for tariff2).
+- A mapping files (tab-delimited text file). Minimal content: the first columns contains the names of all indicators needed by the coding algorithm (called "target indicators" here). The second column contains the mapping to each target indicators, as a valid R expression: expressions can be functions of zero or more variables of the WHO VA instrument, or any of the preceding target indicators. In addition to standard R functions, a small set of convenience functions which is provided in utils.R can be called to achieve the mapping. The release comes with currently two mapping files, one for interVA4, and one for tariff2).
 
 **Output**		
 A CSV file intended for processing by a coding algorithm.
