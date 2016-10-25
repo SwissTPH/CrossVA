@@ -2,11 +2,11 @@ target variable	mapping	Question	Question	Note	InterVA4
 ID	as.integer(rec_id)				0
 ELDER	true_to_y(ageInYears > 65 || age_adult > 65)	Was (s)he aged 65 years or over at death?			1010
 MIDAGE	true_to_y((ageInYears >=50 && ageInYears <= 64) || (age_group ==  'adult' && age_adult >= 50 && age_adult <= 64))	Was (s)he aged 50 to 64 years at death?			1020
-ADULT	true_to_y((ageInYears >=15 && ageInYears <= 49) || (age_group ==  'adult' && age_adult >= 15 && age_adult <= 49))	Was (s)he aged 15-49 years at death?			1030
-CHILD	true_to_y((ageInYears >= 5 && ageInYears <=14) || (age_group ==  'child' && age_child_unit == 'days' && age_child_days >= 5*365.25 && age_child_days <= 11*365.25) || (age_group ==  'child' && age_child_unit == 'months' && age_child_months >= 5*12 && age_child_months <= 11*12) || (age_group ==  'child' && age_child_unit == 'years' && age_child_years >= 5 && age_child_years <= 11) || (age_group ==  'adult' && age_adult > 11 && age_adult <= 14))	Was (s)he aged 5 to 14 years at death?			1040
+ADULT	true_to_y(isAdult == 1)	Was (s)he aged 15-49 years at death?			1030
+CHILD	true_to_y(isChild == 1)	Was (s)he aged 5 to 14 years at death?			1040
 UNDER5	true_to_y((ageInYears >= 1 && ageInYears <=4) || (age_group ==  'child' && age_child_unit == 'days' && age_child_days >= 1*365.25 && age_child_days <= 4*365.25) || (age_group ==  'child' && age_child_unit == 'months' && age_child_months >= 1*12 && age_child_months <= 4*12) || (age_group ==  'child' && age_child_unit == 'years' && age_child_years >= 1 && age_child_years <= 4))	Was (s)he aged 1 to 4 years at death?			1050
 INFANT	true_to_y((ageInDays >= 30.4 && ageInDays <= 12*30.4) || (age_group ==  'child' && age_child_unit == 'days' && age_child_days >= 30.4 && age_child_days <= 12*30.4) || (age_group ==  'child' && age_child_unit == 'months' && age_child_months >= 1 && age_child_months <= 12) || (age_group ==  'child' && age_child_unit == 'years' && age_child_years == 1))	Was (s)he aged 1 to 11 months at death?			1060
-NEONATE	true_to_y(((ageInDays >= 0 && ageInDays <= 28)) || (age_group ==  'neonate' && age_neonate_days <= 28))	Was (s)he aged 28 days or less at death?			1070
+NEONATE	true_to_y(isNeonatal == 1)	Was (s)he aged 28 days or less at death?			1070
 MALE	true_to_y(Id10019 == 'male')	Was the deceased male?	What was the sex of the deceased?		1080
 FEMALE	true_to_y(Id10019 == 'female')	Was the deceased female?	What was the sex of the deceased?		1090
 MAGEGP1	true_to_y(Id10019 == 'female' && ((ageInYears >=12 && ageInYears <= 19) || (age_group ==  'adult' && age_adult >= 12 && age_adult <= 19)))	Was this a woman aged 12 to 19 years at death?	What was the sex of the deceased?		1100
