@@ -2,10 +2,10 @@
 true_to_y <- function(expr) {
   value<-""
   try(value<-eval(parse(text = expr), envir = xda_env))#, silent = TRUE)
-  if (value == TRUE) {
-    return("y")
-  } else {
+  if (is.na(value) || value == ""){
     return("")
+  } else {
+    return("y")
   }
 }
 
@@ -13,7 +13,7 @@ true_to_y <- function(expr) {
 true_to_y_dot <- function(expr) {
   value<-"."
   try(value<-eval(parse(text = expr), envir = xda_env))#, silent = TRUE)
-  if (value == "."){
+  if (is.na(value) || value == "."){
     return(".")
   }
   if (value == TRUE) {
@@ -50,8 +50,11 @@ multi_select_contains <- function(what, who_id) {
 yes_to_code <- function(qlist, clist, default) {
   code <- ""
   for (i in 1:length(qlist)) {
-    if (get(qlist[i], envir = xda_env) == "yes") {
-      code <- paste(code, clist[i])
+    who_value <- get(qlist[i], envir = xda_env)
+    if (!is.na(who_value)){
+      if (who_value == "yes") {
+        code <- paste(code, clist[i])
+      }
     }
   }
   # use default if code is empty
@@ -79,6 +82,9 @@ range_to_code <- function(from_list, to_list, default, who_id) {
 map_code <- function(from_list, to_list, who_id) {
   code <- ""
   value <- get(who_id, envir = xda_env)
+  if (is.na(value)){
+    return(code)
+  }
   for (i in 1:length(from_list)) {
     if (from_list[i] == value) {
       code <- to_list[i]
