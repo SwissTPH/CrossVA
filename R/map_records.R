@@ -6,7 +6,7 @@ xda_env <- new.env()
 #'
 #' @param records A dataframe, obtained from reading an ODKBriefcase
 #'   export of records collected with the WHO questionnaire.
-#' @param mapping Name of an algorithm to map to (one of "interva4" or "tariff2""),
+#' @param mapping Name of an algorithm to map to (one of "interva4", "insilicova", or "tariff2""),
 #'   or name of a mapping file.
 #' @param csv_outfile Path to a file to write transformed data to.
 #'   Defaults to empty string, in which case no file is written.
@@ -17,7 +17,16 @@ xda_env <- new.env()
 #'
 #' record_f_name <- system.file('sample', 'who_va_output.csv', package = 'xva')
 #' records <- read.csv(record_f_name)
-#' output_data <- map_records(records, 'interva4')
+#' output_data <- map_records(records, 'insilicova')
+#' output_f_name <- "output_for_insilicova.csv"
+#' write.table(
+#' output_data,
+#' output_f_name,
+#' row.names = FALSE,
+#' na = "",
+#' qmethod = "escape",
+#' sep = ","
+#' )
 #' mapping_file <- system.file('mapping', 'interva4_mapping.txt', package = 'xva')
 #' output_data <- map_records(records, mapping_file)
 #' output_f_name <- "output_for_interva4.csv"
@@ -33,13 +42,13 @@ xda_env <- new.env()
 #' @export
 #'
 map_records <- function(records, mapping, csv_outfile = "") {
-  if (mapping %in% c('interva4', 'tariff2')){
+  if (mapping %in% c('interva4', 'insilicova', 'tariff2')){
     mapping_f_name <- system.file('mapping', paste(mapping, '_mapping.txt', sep = ''), package = 'xva')
   }else{
     mapping_f_name <- mapping
   }
   map_def <- utils::read.delim(mapping_f_name)
-  records[is.na(records)] <- ""
+  #records[is.na(records)] <- ""
   headers <- names(records)
 
   # number of variables required by coding algorithm
@@ -60,7 +69,7 @@ map_records <- function(records, mapping, csv_outfile = "") {
     for (i in 1:target_n) {
       target_var <- as.character(map_def[i, 1])
       expr <- as.character(map_def[i, 2])
-      current_data[i] <- eval_expr(expr)
+      try(current_data[i] <- eval(parse(text = expr), envir = xda_env)) #, silent = TRUE)
       # make the value available for reference later in the destination var set
       name <-
         regmatches(target_var, regexpr("[^\\-]*$", target_var))

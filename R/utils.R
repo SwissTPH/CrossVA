@@ -1,16 +1,7 @@
-# wrapper around eval, with some extra functionality
-eval_expr <- function(expr) {
-  if (nchar(expr) == 0) {
-    return("")
-  }
-  value <- ""
-  value <- tryCatch(eval(parse(text = expr), envir = xda_env))
-  return(value)
-}
-
-# map true to character 'y'
+# map true to character 'y', return "" for everything else
 true_to_y <- function(expr) {
-  value <- eval_expr(expr)
+  value<-""
+  try(value<-eval(parse(text = expr), envir = xda_env))#, silent = TRUE)
   if (value == TRUE) {
     return("y")
   } else {
@@ -18,8 +9,32 @@ true_to_y <- function(expr) {
   }
 }
 
+# map true to character 'y', or return "." if the expression cannot be evaluated because of an NA
+true_to_y_dot <- function(expr) {
+  value<-"."
+  try(value<-eval(parse(text = expr), envir = xda_env))#, silent = TRUE)
+  if (value == "."){
+    return(".")
+  }
+  if (value == TRUE) {
+    return("Y")
+  } 
+  return("")
+}
+
+# evaluate expression, return default on empty
+exp_def <- function(expr, default) {
+  value<-""
+  try(value<-eval(parse(text = expr), envir = xda_env))#, silent = TRUE)
+  if (is.null(value) ||  is.na(value) || nchar(value) < 1) {
+    return(default)
+  } else {
+    return(value)
+  }
+}
+
 multi_select_contains <- function(what, who_id) {
-  if (who_id == -1) {
+  if (is.na(who_id)) {
     return(FALSE)
   }
   split_expression <- as.list(strsplit(who_id, " ")[[1]])
@@ -48,16 +63,15 @@ yes_to_code <- function(qlist, clist, default) {
 
 # from_list: upper limits of range to_list: codes to map to
 range_to_code <- function(from_list, to_list, default, who_id) {
-  if (get(who_id, envir = xda_env) == "") {
-    return("")
-  }
   code <- default
-  value <- as.numeric(get(who_id, envir = xda_env))
-  for (i in 1:length(to_list)) {
-    if (value > from_list[i] && value <= from_list[i + 1]) {
-      code <- to_list[i]
+  try({
+    value <- as.numeric(get(who_id, envir = xda_env))
+    for (i in 1:length(to_list)) {
+      if (value > from_list[i] && value <= from_list[i + 1]) {
+        code <- to_list[i]
+      }
     }
-  }
+  }, silent = TRUE)
   return(code)
 }
 
@@ -87,15 +101,6 @@ map_multi_code <- function(from_list, to_list, who_id) {
   return(trimws(code))
 }
 
-# evaluate expression, return default on empty
-exp_def <- function(expr, default) {
-  value <- eval_expr(expr)
-  if (nchar(value) > 0) {
-    return(value)
-  } else {
-    return(default)
-  }
-}
 
 # get year from a date string, slightly more safe than just substringing
 get_year <- function(date_string) {
