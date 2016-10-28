@@ -69,7 +69,9 @@ map_records <- function(records, mapping, csv_outfile = "") {
     for (i in 1:target_n) {
       target_var <- as.character(map_def[i, 1])
       expr <- as.character(map_def[i, 2])
-      try(current_data[i] <- eval(parse(text = expr), envir = xda_env)) #, silent = TRUE)
+      #print(target_var)
+      #print(expr)
+      try(current_data[i] <- eval(parse(text = expr), envir = xda_env))
       # make the value available for reference later in the destination var set
       name <-
         regmatches(target_var, regexpr("[^\\-]*$", target_var))

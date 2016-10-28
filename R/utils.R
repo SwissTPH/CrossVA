@@ -1,8 +1,9 @@
 # map true to character 'y', return "" for everything else
 true_to_y <- function(expr) {
   value<-""
-  try(value<-eval(parse(text = expr), envir = xda_env))#, silent = TRUE)
-  if (is.na(value) || value == ""){
+  try(value<-eval(parse(text = expr), envir = xda_env))
+  #print(value)
+  if (is.na(value) || value == "" || value == FALSE){
     return("")
   } else {
     return("y")
@@ -12,7 +13,7 @@ true_to_y <- function(expr) {
 # map true to character 'y', or return "." if the expression cannot be evaluated because of an NA
 true_to_y_dot <- function(expr) {
   value<-"."
-  try(value<-eval(parse(text = expr), envir = xda_env))#, silent = TRUE)
+  try(value<-eval(parse(text = expr), envir = xda_env))
   if (is.na(value) || value == "."){
     return(".")
   }
@@ -25,7 +26,7 @@ true_to_y_dot <- function(expr) {
 # evaluate expression, return default on empty
 exp_def <- function(expr, default) {
   value<-""
-  try(value<-eval(parse(text = expr), envir = xda_env))#, silent = TRUE)
+  try(value<-eval(parse(text = expr), envir = xda_env))
   if (is.null(value) ||  is.na(value) || nchar(value) < 1) {
     return(default)
   } else {
