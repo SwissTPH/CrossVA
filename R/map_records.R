@@ -112,9 +112,11 @@ map_records <- function(records, mapping, csv_outfile = "") {
 #' output_data <- map_records_interva4(records)
 #' }
 #' @references http://www.interva.net/
-#' TODO: enable export
+#'
+#' @export
+#'
 map_records_interva4 <- function(records, csv_outfile = "" ){
-  return (map_records(records,"interva4_mapping.txt", csv_outfile))
+  return (map_records(records,"interva4", csv_outfile))
 }
 
 #' Map VA records to Tariff 2.
@@ -136,9 +138,36 @@ map_records_interva4 <- function(records, csv_outfile = "" ){
 #' }
 #'
 #' @references James, S. L., Flaxman, A. D., Murray, C. J., & Population Health Metrics Research Consortium. (2011). \emph{Performance of the Tariff Method: validation of a simple additive algorithm for analysis of verbal autopsies.} \emph{Population Health Metrics, 9(1), 1-16.}
-#' TODO: enable export
-
+#'
+#' @export
+#'
 map_records_tariff2 <- function(records, csv_outfile = "" ){
-  return (map_records(records,"tariff2_mapping.txt", csv_outfile))
+  return (map_records(records,"tariff2", csv_outfile))
+}
+
+#' Map VA records to InsilicoVA.
+#'
+#' \code{map_records} transform data collected with the WHO VA instrument
+#'   for coding with the InsilicoVA algorithm.
+#'
+#' @param records A dataframe, obtained from reading an ODKBriefcase
+#'   export of records collected with the WHO questionnaire.
+#' @param csv_outfile Path to a file to write transformed data to.
+#'   Defaults to empty string, in which case no file is written.
+#' @return A dataframe, with the VA records mapped to the variables required
+#'   by InsilicoVA.
+#'
+#' @examples
+#' \dontrun{
+#' records <- read.csv('who_va_output.csv')
+#' output_data <- map_records_tariff2(records)
+#' }
+#'
+#' @references Tyler H. McCormick, Zehang R. Li, Clara Calvert, Amelia C. Crampin, Kathleen Kahn and Samuel J. Clark (2014). Probabilistic cause-of-death assignment using verbal autopsies, Journal of the American Statistical Association, to appear
+#'
+#' @export
+#'
+map_records_insilicova <- function(records, csv_outfile = "" ){
+  return (map_records(records,"insilicova", csv_outfile))
 }
 
