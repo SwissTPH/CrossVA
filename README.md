@@ -35,24 +35,12 @@ records <- read.csv(record_f_name)
 #map to interva4, use name of algorithm
 output_data <- map_records(records, 'interva4')
 output_f_name <- "output_for_interva4.csv"
-write.table(
-  output_data,
-  output_f_name,
-  row.names = FALSE,
-  na = "",
-  qmethod = "escape",
-  sep = ","
-)
+write.table(output_data, output_f_name, row.names = FALSE, na = "", qmethod = "escape", sep = ",")
+
 #map by providing a mapping file (here using the package-provided tariff2 mapping)
 mapping_file <- system.file('mapping', 'tariff2_mapping.txt', package = 'xva')
 output_data <- map_records(records, mapping_file)
 output_f_name <- "output_for_smartva.csv"
-write.table(
-  output_data,
-  output_f_name,
-  row.names = FALSE,
-  na = "",
-  qmethod = "escape",
-  sep = ","
-)
+write.table(output_data, output_f_name, row.names = FALSE, na = "", qmethod = "escape", sep = ",")
+
 ```
