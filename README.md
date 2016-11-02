@@ -43,4 +43,6 @@ output_data <- map_records(records, mapping_file)
 output_f_name <- "output_for_smartva.csv"
 write.table(output_data, output_f_name, row.names = FALSE, na = "", qmethod = "escape", sep = ",")
 
+#convenience wrapper (here using the package-provided InsilicoVA mapping)
+output_data<-map_records_insilicova(records, "isoutput.csv")
 ```
