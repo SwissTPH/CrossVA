@@ -83,8 +83,8 @@ AC_ABDM	true_to_y(Id10204 == 'yes' && Id10205 >= 0 && Id10205 < 14)	Did (s)he ha
 CH_ABDM	true_to_y(Id10204 == 'yes' && Id10205 >= 14)	Did (s)he have a lump inside the abdomen for 2 weeks or more?	For how many days before death did (s)he have a mass in the abdomen?		2390
 HEADACHE	true_to_y(Id10207 == 'yes')	Did (s)he have a severe headache?	Did (s)he have a severe headache?		2400
 SKIN	true_to_y(Id10227 == 'yes')	Did (s)he have any skin problems?	Did (s)he have any skin problems?		2410
-SKIN_LES	true_to_y(Id10227 == 'yes' && id3B540 == 'yes')	Did (s)he have any ulcers, abscess or sores anywhere except on the feet?	Did (s)he have any ulcers, abscess or sores anywhere except on the feet?		2420
-SK_FEET	true_to_y(Id10227 == 'yes' && Id10230 == 'yes')	Did (s)he have any , ulcers, abscess or sores on the feet that were not also on other parts of the body?	Did (s)he have any ulcers, abscess or sores on the feet that were not also on other parts of the body?		2430
+SKIN_LES	true_to_y(Id10227 == 'yes')	Did (s)he have any ulcers, abscess or sores anywhere except on the feet?	Did (s)he have any ulcers, abscess or sores anywhere except on the feet?		2420
+SK_FEET	true_to_y(Id10230 == 'yes')	Did (s)he have any , ulcers, abscess or sores on the feet that were not also on other parts of the body?	Did (s)he have any ulcers, abscess or sores on the feet that were not also on other parts of the body?		2430
 RASH	true_to_y(Id10227 == 'yes' && Id10233 == 'yes')	During the illness that led to death, did (s)he have any skin rash?	During the illness that led to death, did (s)he have any skin rash?		2440
 AC_RASH	true_to_y(Id10233 == 'yes' && Id10234 >= 0 && Id10234 < 7)	Did (s)he have the skin rash for less than 1 week?	For how many days did (s)he have the skin rash?		2450
 CH_RASH	true_to_y(Id10233 == 'yes' && Id10234 >= 7)	Did (s)he have the skin rash for 1 week or more?	For how many days did (s)he have the skin rash?		2460
