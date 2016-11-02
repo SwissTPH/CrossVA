@@ -2,7 +2,6 @@
 true_to_y <- function(expr) {
   value<-""
   try(value<-eval(parse(text = expr), envir = xda_env))
-  #print(value)
   if (is.na(value) || value == "" || value == FALSE){
     return("")
   } else {
@@ -21,6 +20,18 @@ true_to_y_dot <- function(expr) {
     return("Y")
   } 
   return("")
+}
+
+# return 'y' if any of the strings evaluates to TRUE, return "" for everything else
+any_to_y <- function(expressions) {
+  #print(expressions)
+  #print(str(expressions))
+  if (any(expressions, na.rm = TRUE)){
+    return("y")
+  }
+  else{
+    return("")
+  }
 }
 
 # evaluate expression, return default on empty
