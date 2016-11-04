@@ -1,4 +1,4 @@
-Package: xva
+Package: CrossVA
 Type: Package
 Title: Verbal Autopsy Data Tranform for Use with Various Coding Algorithms
 Version: 0.9

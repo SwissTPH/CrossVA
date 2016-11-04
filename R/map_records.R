@@ -15,7 +15,7 @@ xda_env <- new.env()
 #'
 #' @examples
 #'
-#' record_f_name <- system.file('sample', 'who_va_output.csv', package = 'xva')
+#' record_f_name <- system.file('sample', 'who_va_output.csv', package = 'CrossVA')
 #' records <- read.csv(record_f_name)
 #' output_data <- map_records(records, 'insilicova')
 #' output_f_name <- "output_for_insilicova.csv"
@@ -27,7 +27,7 @@ xda_env <- new.env()
 #' qmethod = "escape",
 #' sep = ","
 #' )
-#' mapping_file <- system.file('mapping', 'interva4_mapping.txt', package = 'xva')
+#' mapping_file <- system.file('mapping', 'interva4_mapping.txt', package = 'CrossVA')
 #' output_data <- map_records(records, mapping_file)
 #' output_f_name <- "output_for_interva4.csv"
 #' write.table(
@@ -43,7 +43,7 @@ xda_env <- new.env()
 #'
 map_records <- function(records, mapping, csv_outfile = "") {
   if (mapping %in% c('interva4', 'insilicova', 'tariff2')){
-    mapping_f_name <- system.file('mapping', paste(mapping, '_mapping.txt', sep = ''), package = 'xva')
+    mapping_f_name <- system.file('mapping', paste(mapping, '_mapping.txt', sep = ''), package = 'CrossVA')
   }else{
     mapping_f_name <- mapping
   }
@@ -107,7 +107,7 @@ map_records <- function(records, mapping, csv_outfile = "") {
 #'
 #' @examples
 #' \dontrun{
-#' record_f_name <- system.file('sample', 'who_va_output.csv', package = 'xva')
+#' record_f_name <- system.file('sample', 'who_va_output.csv', package = 'CrossVA')
 #' records <- read.csv(record_f_name)
 #' output_data <- map_records_interva4(records)
 #' }

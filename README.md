@@ -1,8 +1,8 @@
-# CrossVA (xva)
+# CrossVA
 
 **Description** 	
 
-CrossVA (xva) is an R package for transforming verbal autopsy records collected using the WHO VA 2016 instrument to be used as input for different coding algorithms. 
+CrossVA is an R package for transforming verbal autopsy records collected using the WHO VA 2016 instrument to be used as input for different coding algorithms. 
 
 **Input**		
 - CSV file containing submissions of the 2016 WHO VA questionnaire (exported from ODKAggregate using ODKBriefcase)
