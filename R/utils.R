@@ -24,8 +24,6 @@ true_to_y_dot <- function(expr) {
 
 # return 'y' if any of the strings evaluates to TRUE, return "" for everything else
 any_to_y <- function(expressions) {
-  #print(expressions)
-  #print(str(expressions))
   if (any(expressions, na.rm = TRUE)){
     return("y")
   }
