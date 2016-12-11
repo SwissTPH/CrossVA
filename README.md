@@ -2,7 +2,7 @@
 
 **Description** 	
 
-CrossVA is an R package for transforming verbal autopsy records collected using the WHO VA 2016 instrument to be used as input for different coding algorithms. 
+CrossVA is an R package for transforming verbal autopsy records collected using the WHO VA 2016 instrument to be used as input for different coding algorithms. CrossVA is made available by WHO, in collaboration with Swiss Tropical and Public Health Institute.
 
 **Input**		
 - CSV file containing submissions of the 2016 WHO VA questionnaire (exported from ODKAggregate using ODKBriefcase)
@@ -21,11 +21,11 @@ Initial, not intended for production use
 For testing purposes, install via
 ```
 install.packages("devtools")
-devtools::install_github("SwissTPH/xva")
+devtools::install_github("SwissTPH/CrossVA")
 ```
-or download and install from [here https://github.com/SwissTPH/xva/releases](https://github.com/SwissTPH/xva/releases)
+or download and install from [here https://github.com/SwissTPH/CrossVA/releases](https://github.com/SwissTPH/CrossVa/releases)
 
-Use your own VA records, or the [sythetic sample data set included in the package](https://github.com/SwissTPH/xva/raw/master/inst/sample/who_va_output.csv) for testing.
+Use your own VA records, or the [sythetic sample data set included in the package](https://github.com/SwissTPH/CrossVA/raw/master/inst/sample/who_va_output.csv) for testing.
 
 ***Examples***
 ```
