@@ -29,7 +29,7 @@ Use your own VA records, or the [sythetic sample data set included in the packag
 
 ***Examples***
 ```
-library(xva)
+library(CrossVA)
 record_f_name <- system.file('sample', 'who_va_output.csv', package = 'xva')
 records <- read.csv(record_f_name)
 #map to interva4, use name of algorithm
