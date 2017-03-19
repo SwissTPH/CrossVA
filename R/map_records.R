@@ -48,7 +48,6 @@ map_records <- function(records, mapping, csv_outfile = "") {
     mapping_f_name <- mapping
   }
   map_def <- utils::read.delim(mapping_f_name)
-  #records[is.na(records)] <- ""
   headers <- names(records)
 
   # number of variables required by coding algorithm
@@ -60,6 +59,10 @@ map_records <- function(records, mapping, csv_outfile = "") {
     record <- records[rec_count,]
     for (j in 1:length(headers)) {
       value <- as.character(record[1, j])
+      val_as_num<-suppressWarnings(as.numeric(value))
+      if (!is.na(val_as_num)){
+        value<-val_as_num
+      }
       header <- headers[j]
       header_cleaned <-
         regmatches(header, regexpr("[^\\.]*$", header))

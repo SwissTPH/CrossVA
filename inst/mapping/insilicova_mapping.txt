@@ -1,4 +1,4 @@
-	mapping	Question	Question	Note	InterVA4
+target variable	mapping	Question	Question	Note	InterVA4
 id	as.integer(rec_id)				0
 elder	any_to_y(c(ageInYears > 65, age_adult > 65))	Was (s)he aged 65 years or over at death?			1010
 midage	any_to_y(c(ageInYears >=50 && ageInYears <= 64, age_group ==  'adult' && age_adult >= 50 && age_adult <= 64))	Was (s)he aged 50 to 64 years at death?			1020

@@ -32,6 +32,16 @@ any_to_y <- function(expressions) {
   }
 }
 
+# return '' if any of the strings evaluates to TRUE, return "y" for everything else
+any_to_empty <- function(expressions) {
+  if (any(expressions, na.rm = TRUE)){
+    return("")
+  }
+  else{
+    return("y")
+  }
+}
+
 # evaluate expression, return default on empty
 exp_def <- function(expr, default) {
   value<-""
