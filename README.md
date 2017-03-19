@@ -2,7 +2,7 @@
 
 **Description** 	
 
-CrossVA is an R package for transforming verbal autopsy records collected using the WHO VA 2016 instrument to be used as input for different coding algorithms. 
+CrossVA is an R package for transforming verbal autopsy records collected using the WHO VA 2016 instrument to be used as input for different coding algorithms. Currently supports user-supplied mappings, and provides unvalidated mapping definitions to transform to InterVA4, Tariff 2, and InSilicoVA. This package is made available by WHO, in collaboration with Swiss Tropical and Public Health Institute.
 
 **Input**		
 - CSV file containing submissions of the 2016 WHO VA questionnaire (exported from ODKAggregate using ODKBriefcase)
