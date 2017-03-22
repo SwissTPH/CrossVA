@@ -160,7 +160,7 @@ PLACENT_R	true_to_y(Id10330 == 'no')	Was the placenta not completely delivered?	
 DISCH_SM	true_to_y(Id10322 == 'yes')	Did she have foul smelling vaginal discharge during pregnancy or after delivery?	Did she have foul smelling vaginal discharge during pregnancy or after delivery?		3310
 TERM_ATT	true_to_y(Id10333 == 'yes')	Did she attempt to terminate the pregnancy?	Did she attempt to terminate the pregnancy?		3330
 ABORT	true_to_y(Id10334 == 'yes')	Did she recently have a pregnancy that ended in an abortion (spontaneous or induced)?	Did she recently have a pregnancy that ended in an abortion (spontaneous or induced)?		3340
-BORN_EARLY	any_to_yc((Id10367 >= 0 && Id10367 < 9, Id10347 == 'yes'))	Had the pregnancy lasted less than 34 weeks when the baby was born?	How many months long was the pregnancy before the child was born?	Not accurate since WHO asks for month and InterVA wants Weeks	4000
+BORN_EARLY	any_to_y(c(Id10367 >= 0 && Id10367 < 9, Id10347 == 'yes'))	Had the pregnancy lasted less than 34 weeks when the baby was born?	How many months long was the pregnancy before the child was born?	Not accurate since WHO asks for month and InterVA wants Weeks	4000
 BORN_3437	true_to_y(Id10367 == 9)	Had the pregnancy lasted between 34 and 37 weeks when the baby was born?	How many months long was the pregnancy before the child was born?	Not accurate since WHO asks for month and InterVA wants Weeks	4010
 BORN_38	true_to_y(Id10367 > 9)	Had the pregnancy lasted more than 37 weeks when the baby was born?	How many months long was the pregnancy before the child was born?	Not accurate since WHO asks for month and InterVA wants Weeks	4020
 AB_SIZE	true_to_y(Id10362 == 'no')	Was the baby of abnormal size?	At birth, was the baby of usual size?		4030
