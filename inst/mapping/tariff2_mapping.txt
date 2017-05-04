@@ -1,6 +1,5 @@
 target variable	mapping	type	caption or calculation	Note
-SubmissionDate	SubmissionDate			
-interviewstarttime	paste(Id10012, Id10011)	get start time	Start time of interview	
+interviewstarttime	Id10011	get start time	Start time of interview	
 interviewdate	paste(get_day(Id10012), get_month(Id10012), get_year(Id10012), sep='.')	get today	Date of interview	
 Generalmodule-gen_1_1	""""""	add note prompt	"This instrument was developed by the Population Health Metrics Research Consortium.
 
@@ -15,16 +14,16 @@ Generalmodule-general3-gen_3_1	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id1
 Generalmodule-general3-qconsentCheck-gen_3_2	""""""	add note prompt	Thank the respondent for his/her time and end the interview.	
 gen_5_a	""""""	add note prompt	Questions on the Deceased Section	
 general5-gen_5_0	paste(Id10017,Id10018)	add text prompt	What was the name of the deceased?	
-general5-birthDate-gen_5_1a	exp_def(get_year(Id10021),9999)	add integer prompt	What year was the deceased born?	
+general5-birthDate-gen_5_1a	exp_def(get_year(Id10021),999)	add integer prompt	What year was the deceased born?	
 general5-birthDate-gen_5_1b	exp_def(get_month(Id10021),99)	add integer prompt	What month was the deceased born?	
 general5-birthDate-gen_5_1c	exp_def(get_day(Id10021),99)	add integer prompt	What day of the month was the deceased born?	
 general5-birthDate-birthday	"paste(t_gen_5_1a, t_gen_5_1b, t_gen_5_1c,sep=""-"")"	calculate	concat(${gen_5_1a},'-', ${gen_5_1b},'-', ${gen_5_1c})	
 general5-birthDate-wrongbirthday	""""""	add note prompt	Sorry, the birthday provided is past today's date.  Please go back and check the date.	
 general5-gen_5_2	map_code(c('male','female'),c(1,2),'Id10019')	add select one prompt using sex	What was the sex of the deceased?	
-general5-deathDate-gen_5_3a	exp_def(get_year(Id10023),9999)	add integer prompt	What year did the deceased die?	
+general5-deathDate-gen_5_3a	exp_def(get_year(Id10023),999)	add integer prompt	What year did the deceased die?	
 general5-deathDate-gen_5_3b	exp_def(get_month(Id10023),99)	add integer prompt	What month did the deceased die?	
 general5-deathDate-gen_5_3c	exp_def(get_day(Id10023),99)	add integer prompt	What day of the month did the deceased die?	
-general5-lastknownAge-gen_5_4	range_to_code(c(0,27,365,999999),c(4,2,1),9,'ageInDays')	add select one prompt using yearMonthDayNoAnswer	What was the last known age of the deceased?	
+general5-lastknownAge-gen_5_4	range_to_code(c(-1,31,365,999999),c(4,2,1),9,'ageInDays')	add select one prompt using yearMonthDayNoAnswer	What was the last known age of the deceased?	
 general5-lastknownAge-gen_5_4a	ifelse (t_gen_5_4=='1', ageInYears,'')	add integer prompt	Years - if one year or older	
 general5-lastknownAge-gen_5_4b	ifelse (t_gen_5_4=='2', ageInMonths,'')	add integer prompt	Months - if less than one year	
 general5-lastknownAge-gen_5_4c	ifelse (t_gen_5_4=='4', ageInDays, '')	add integer prompt	Days - if less than one month	
@@ -60,11 +59,11 @@ general5-adult	ifelse ((4380 <= t_agedays) || (t_gen_5_4d == '3'), '1', '0')	add
 general5-child	ifelse(((29 <t_agedays) && (t_agedays < 4380)) || (t_gen_5_4d=='2'), '1', '0')	add calculate prompt	Indicator for child decedent	
 general5-neonate	ifelse((t_gen_5_4== '2' && t_gen_5_4b<= 1) || (t_gen_5_4== '4' && t_gen_5_4c<=28) || t_gen_5_4d=='1',  '1','0')	add calculate prompt	Indicator for neonate decedent	
 gen_6_a	""""""	add note prompt	Questions on the Notification of Death Section	
-general6-gen_6_1	""""""	add select one prompt using yesno	Has this death been registered?	
+general6-gen_6_1	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10462')	add select one prompt using yesno	Has this death been registered?	
 general6-registerGen-gen_6_2a	""""""	add note prompt	Record the date of registration	
-general6-registerGen-gen_6_2b	get_year(Id10023)	add integer prompt	Year	
-general6-registerGen-gen_6_2c	get_month(Id10023)	add integer prompt	Month	
-general6-registerGen-gen_6_2d	get_day(Id10023)	add integer prompt	Day of the month	
+general6-registerGen-gen_6_2b	get_year(Id10071)	add integer prompt	Year	
+general6-registerGen-gen_6_2c	get_month(Id10071)	add integer prompt	Month	
+general6-registerGen-gen_6_2d	get_day(Id10071)	add integer prompt	Day of the month	
 general6-gen_6_3	Id10070	add integer prompt	Record the registration number:	
 general6-gen_6_4	""""""	add select one prompt using yesno	Has this death been notified?	
 general6-gen_6_5	""""""	add integer prompt	Record the notification number:	
@@ -74,12 +73,12 @@ general6-gen_6_8	""""""	add select one prompt using yesno	Does one of the parent
 general6-gen_6_9	""""""	add select one prompt using motherfather	Which parent will we record?	
 general6-gen_6_10	""""""	add integer prompt	Record the parent’s National ID number:	
 adult5-adult_5_1	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10077')	add select one prompt using yesno	Did ${gen_5_0} suffer from any injury or accident that led to his/her death?	
-adult5-adult_5_2	yes_to_code(c('Id10079','Id10083','Id10085','Id10084','Id10086','Id10089','Id10091'),c(1,2,3,4,5,6,7),'9')	add select multiple prompt using accident	What kind of injury or accident did ${gen_5_0} suffer from?  (Read through the list in sequence and MARK ALL THAT APPLY)	
+adult5-adult_5_2	yes_to_code(c('Id10079','Id10083','Id10085','Id10084','Id10086','Id10089','Id10091','Id10082','Id10087','Id10095','Id10096','Id10097','Id10091','Id10092','Id10093','Id10094'),c(1,2,3,4,5,6,7,11,11,11,11,11,11,11,11,11),'9')	add select multiple prompt using accident	What kind of injury or accident did ${gen_5_0} suffer from?  (Read through the list in sequence and MARK ALL THAT APPLY)	
 adult5-adult_5_2a	""""""	add text prompt	Decedent suffered other injury, specified	
 adult5-adult_5_3	map_code(c('yes','no','','dk','ref'),c(1,0,0,9,8),'Id10099')	add select one prompt using yesno	Was the injury or accident self-inflicted?	Map empty answers to 0 (=no), as this means Id10098 (is this an accident) was answered with yes
-adult5-adult_5_4	map_code(c('yes','no','','dk','ref'),c(1,0,0,9,8),'Id10100')	add select one prompt using yesno	Was the injury or accident intentionally inflicted by someone else?	Map empty answers to 0 (=no), as this means Id10098 (is this an accident) was answered with yes
+adult5-adult_5_4	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10100')	add select one prompt using yesno	Was the injury or accident intentionally inflicted by someone else?	Map empty answers to 0 (=no), as this means Id10098 (is this an accident) was answered with yes
 child7-child_4_47	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10077')	add select one prompt using yesno	Did ${gen_5_0} suffer from any injury or accident that led to his/her death?	
-child7-child_4_48	yes_to_code(c('Id10079','Id10083','Id10085','Id10084','Id10086','Id10089','Id10091'),c(1,2,3,4,5,6,7),'9')	add select multiple prompt using accidentchild	What kind of injury or accident did ${gen_5_0} suffer from?  (Read through the list in sequence and MARK ALL THAT APPLY)	
+child7-child_4_48	yes_to_code(c('Id10079','Id10083','Id10085','Id10084','Id10086','Id10089','Id10091','Id10082','Id10087','Id10095','Id10096','Id10097','Id10091','Id10092','Id10093','Id10094'),c(1,2,3,4,5,6,7,11,11,11,11,11,11,11,11,11),'9')	add select multiple prompt using accidentchild	What kind of injury or accident did ${gen_5_0} suffer from?  (Read through the list in sequence and MARK ALL THAT APPLY)	
 child7-child_4_48a	""""""	add text prompt	Decedent suffered other injury, specified	
 child7-child_4_49	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10100')	add select one prompt using yesno	Was the injury or accident intentionally inflicted by someone else?	
 adultModule-adult_1_a	""""""	add note prompt	History of Chronic Conditions of the Deceased Section	
@@ -91,14 +90,14 @@ adultModule-adult1-adult_1_1g	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10
 adultModule-adult1-adult_1_1h	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10136')	add select one prompt using yesno	Epilepsy	
 adultModule-adult1-adult_1_1i	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10133')	add select one prompt using yesno	Heart Disease	
 adultModule-adult1-adult_1_1d	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10125')	add select one prompt using yesno	Tuberculosis	
-adultModule-adult1-adult_1_1l	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10132')	add select one prompt using yesno	Stroke	
+adultModule-adult1-adult_1_1l	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10141')	add select one prompt using yesno	Stroke	
 adultModule-adult1-adult_1_1n	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10127')	add select one prompt using yesno	AIDS	
 adultModule-adult_2_a	""""""	add note prompt	Symptom Checklist Section	
 adultModule-adult2-adult_2_2	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10147')	add select one prompt using yesno	Did ${gen_5_0} have a fever?	
 adultModule-adult2-adult_2_4	map_code(c('mild','moderate','severe'),c(1,2,3),'Id10150')	add select one prompt using severity	How severe was the fever?	
 adultModule-adult2-adult_2_5	map_code(c('continuous','on_and_off','nightly','DK','Ref'),c(1,2,3,9,8),'Id10151')	add select one prompt using pattern	What was the pattern of fever?	
 adultModule-adult2-adult_2_7	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10233')	add select one prompt using yesno	Did ${gen_5_0} have a rash?	
-adultModule-adult2-adult_2_9	map_code(c('face','trunk_or_abdomen','extremities','everywhere'),c(1,2,3,4),'Id10235')	add select multiple prompt using rashlocation	Where was the rash located?	
+adultModule-adult2-adult_2_9	map_code(c('face','trunk','extremities','everywhere'),c(1,2,3,4),'Id10235')	add select multiple prompt using rashlocation	Where was the rash located?	
 adultModule-adult2-adult_2_9a	""""""	add text prompt	Where was the rash located? [other location, specified]	
 adultModule-adult2-adult_2_10	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10228')	add select one prompt using yesno	Did ${gen_5_0} have sores?	
 adultModule-adult2-adult_2_11	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10229')	add select one prompt using yesno	Did the sores have clear fluid or pus?	
@@ -107,7 +106,7 @@ adultModule-adult2-adult_2_14	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10
 adultModule-adult2-adult_2_15	ifelse(t_adult_2_14==1,4,'')	add select one prompt using dayNoAnswer	For how many days did the ulcer ooze pus?	
 adultModule-adult2-adult_2_15a	Id10232	add integer prompt	For how many days did the ulcer ooze pus? [specify units]	
 adultModule-adult2-adult_2_21	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10265')	add select one prompt using yesno	Did ${gen_5_0} have yellow discoloration of the eyes?	
-adultModule-adult2-adult_2_22	ifelse (t_adult_2_2==1,4,'')	add select one prompt using monthDayNoAnswer	For how long did ${gen_5_0} have the yellow discoloration?	
+adultModule-adult2-adult_2_22	ifelse (t_adult_2_21==1,4,'')	add select one prompt using monthDayNoAnswer	For how long did ${gen_5_0} have the yellow discoloration?	
 adultModule-adult2-adult_2_22a	Id10266	add integer prompt	Number of days	
 adultModule-adult2-adult_2_22b	""""""	add integer prompt	Number of months	
 adultModule-adult2-adult_2_25	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10247')	add select one prompt using yesno	Did ${gen_5_0} have puffiness of the face?	
@@ -128,7 +127,7 @@ adultModule-adult2-adult_2_47	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10
 adultModule-adult2-adult_2_50	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10186')	add select one prompt using yesno	Was there blood in the stool?	
 adultModule-adult2-adult_2_51	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10187')	add select one prompt using yesno	Was there blood in the stool up until death?	
 adultModule-adult2-adult_2_52	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10224')	add select one prompt using yesno	Did ${gen_5_0} stop urinating?	
-adultModule-adult2-adult_2_53	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10188')	add select one prompt using yesno	Did ${gen_5_0} vomit in the week preceding the death?	
+adultModule-adult2-adult_2_53	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10189')	add select one prompt using yesno	Did ${gen_5_0} vomit in the week preceding the death?	
 adultModule-adult2-adult_2_55	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10191')	add select one prompt using yesno	Was there blood in the vomit?	
 adultModule-adult2-adult_2_56	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10192')	add select one prompt using yesno	Was the vomit black?	
 adultModule-adult2-adult_2_57	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10261')	add select one prompt using yesno	Did ${gen_5_0} have difficulty swallowing?	
@@ -165,7 +164,7 @@ adultModule-adult2-adult_2_83a	Id10221	add integer prompt	Number of minutes
 adultModule-adult2-adult_2_83b	""""""	add integer prompt	Number of hours	
 adultModule-adult2-adult_2_84	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10222')	add select one prompt using yesno	Did the person become unconscious immediately after the convulsions?	
 adultModule-adult2-adult_2_85	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10258')	add select one prompt using yesno	Was ${gen_5_0} in any way paralyzed?	
-adultModule-adult2-adult_2_87	map_code(c('right_side','left_side','lower_part_of_body','upper_part_of_body','one_leg_only','one_arm_only','whole_body','other'),c(1,2,3,4,5,6,7,11),'Id10258')	add select multiple prompt using paralysislocation	Which were the limbs or body parts paralyzed? (Read through the list in sequence and MARK ALL THAT APPLY)	
+adultModule-adult2-adult_2_87	map_code(c('right_side','left_side','lower_part_of_body','upper_part_of_body','one_leg_only','one_arm_only','whole_body','other'),c(1,2,3,4,5,6,7,11),'Id10260')	add select multiple prompt using paralysislocation	Which were the limbs or body parts paralyzed? (Read through the list in sequence and MARK ALL THAT APPLY)	
 adultModule-adult2-adult_2_87a	""""""	add text prompt	Paralyzed other (specify)	
 adultModule-adult_3_a	""""""	add note prompt	Questions for Women Section	
 adultModule-adult3-adult_3_1	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10294')	add select one prompt using yesno	Did ${gen_5_0} have any swelling or lump in the breast?	
@@ -189,7 +188,7 @@ adultModule-adult3-adult_3_15	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10
 adultModule-adult3-qdeathlabordelivery-adult_3_16	ifelse (t_adult_3_15==1,5,'')	add select one prompt using hourNoAnswer	For how many hours was she in labor?	
 adultModule-adult3-qdeathlabordelivery-adult_3_16a	Id10332	add integer prompt	Number of hours	
 adultModule-adult3-adult_3_17	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10336')	add select one prompt using yesno	Did she die within 6 weeks after having an abortion?	
-adultModule-adult3-adult_3_18	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10306')	add select one prompt using yesno	Did she die within 6 weeks of childbirth?	
+adultModule-adult3-adult_3_18	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10315')	add select one prompt using yesno	Did she die within 6 weeks of childbirth?	
 adultModule-adult3-adult_3_19	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10329')	add select one prompt using yesno	Did she have excessive bleeding after delivery or abortion?	
 adultModule-adult4-adult_4_1	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10412')	add select one prompt using yesno	Did ${gen_5_0} use tobacco?	
 adultModule-adult4-adult_4_2	map_code(c('cigarettes','pipe','chewing_tobacco','local_form_of_tobacco','other'),c(1,2,3,4,11),'Id10414')	add select multiple prompt using tobaccokinds	What kind of tobacco did ${gen_5_0} use?	
@@ -198,7 +197,7 @@ adultModule-adult4-adult_4_4	ifelse (t_adult_4_2a==1,1,'')	add select one prompt
 adultModule-adult4-adult_4_4a	Id10415	add integer prompt	Cigarettes	
 adult_6_a	""""""	add note prompt	Health Records Section	
 adult6-adult_6_1	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10432')	add select one prompt using yesno	Was care sought outside the home while ${gen_5_0} had this illness?	
-adult6-adult_6_2	map_code(c('traditional_healer','homeopath','religious_leader','government_hospital','government_health_center_or_clinic','private_hospital','community_based_practitioner_associated_with_health_system','trained_birth_attendant','private_physician','pharmacy','dk','ref'),c(1,2,3,4,5,6,7,8,9,10,99,88),'Id10433')	add select multiple prompt using provider	Where or from whom did you seek care? (Check all that apply)	
+adult6-adult_6_2	map_code(c('traditional_healer','homeopath','religious_leader','government_hospital','government_health_center_or_clinic','private_hospital','community_based_practitionerinsystem','trained_birth_attendant','private_physician','pharmacy','relative_friend','dk','ref'),c(1,2,3,4,5,6,7,8,9,10,12,99,88),'Id10433')	add select multiple prompt using provider	Where or from whom did you seek care? (Check all that apply)	
 adult6-adult_6_3	Id10434	add text prompt	Record the name and address of any hospital, health center or clinic where care was sought: 	
 adult6-adult_6_3a	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10435')	add select one prompt using yesno	Did a health care worker tell you the cause of death?	
 adult6-adult_6_3b	Id10436	add text prompt	What did the health care worker say?	
@@ -375,7 +374,7 @@ Child5-qDeathCertsChild-child_5_14	Id10468	add text prompt	Record the second und
 Child5-qDeathCertsChild-child_5_15	Id10470	add text prompt	Record the third underlying cause of death from the certificate.	
 Child5-qDeathCertsChild-child_5_16	Id10472	add text prompt	Record the contributing cause(s) of death from the certificate.	
 Child5-HIVtest-child_5_17	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10445')	add select one prompt using yesno	Has the deceased's (biological) mother ever been tested for HIV? 	
-Child5-HIVtest-child_5_18	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10126')	add select one prompt using yesno	Was the HIV test ever positive? 	
+Child5-HIVtest-child_5_18	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10446')	add select one prompt using yesno	Was the HIV test ever positive? 	
 Child5-HIVtest-child_5_19	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10446')	add select one prompt using yesno	Has the deceased's (biological) mother ever been told she had AIDS by a health worker? 	
 adult7-adult_7_a	""""""	add note prompt	"Instructions to the interviewer: Say to the respondent: ""Thank you for the patient responses to this exhaustive set of questions. Could you please summarize, or tell us in your own words, any additional information about the illness and/or death of your loved one?"""	
 adult7-adult_7_b	""""""	add note prompt	"To the interviewer: Listen to what the respondent tells you in his/her own words. Do not prompt except for asking whether there was anything else after the respondent finishes. If the respondent mentions any of the following words, mark ""mentioned"".  Tell the respondent to stop and start again if they mention a word of interest, so you have time to mark it down."	
