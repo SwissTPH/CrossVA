@@ -144,19 +144,19 @@ adultModule-adult2-adult_2_62c	""""""	add integer prompt	Number of months
 adultModule-adult2-adult_2_63	map_code(c('upper_abdomen','lower_abdomen'),c(1,2),'Id10199')	add select one prompt using bellypainlocation	Was the pain in the upper or lower belly?	
 adultModule-adult2-adult_2_64	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10200')	add select one prompt using yesno	Did ${gen_5_0} have a more than usual protruding belly?	
 adultModule-adult2-adult_2_65	ifelse (t_adult_2_64==1,4,'')	add select one prompt using monthDayNoAnswer	For how long before death did ${gen_5_0} have a protruding belly?	
-adultModule-adult2-adult_2_65a	Id10201	add integer prompt	Number of days	
+adultModule-adult2-adult_2_65a	as.integer(Id10201) + as.integer(Id10202)*30.4	add integer prompt	Number of days	
 adultModule-adult2-adult_2_65b	""""""	add integer prompt	Number of months	
 adultModule-adult2-adult_2_66	map_code(c('rapidly','slowly'),c(1,2),'Id10203')	add select one prompt using developmentspeed	How rapidly did ${gen_5_0} develop the protruding belly?	
 adultModule-adult2-adult_2_67	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10204')	add select one prompt using yesno	Did ${gen_5_0} have any mass in the belly?	
 adultModule-adult2-adult_2_68	ifelse(t_adult_2_67==1,4,'')	add select one prompt using monthDayNoAnswer	For how long before death did ${gen_5_0} have a mass in the belly [Specify units]	
-adultModule-adult2-adult_2_68a	Id10205	add integer prompt	Number of days	
+adultModule-adult2-adult_2_68a	as.integer(Id10205)+as.integer(Id10206)*30.4	add integer prompt	Number of days	
 adultModule-adult2-adult_2_68b	""""""	add integer prompt	Number of months	
 adultModule-adult2-adult_2_72	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10208')	add select one prompt using yesno	Did ${gen_5_0} have a stiff neck?	
 adultModule-adult2-adult_2_73	ifelse(t_adult_2_72==1,4,'')	add select one prompt using monthDayNoAnswer	For how long before death did ${gen_5_0} have stiff neck? 	
 adultModule-adult2-adult_2_73a	Id10209	add integer prompt	Number of days	
 adultModule-adult2-adult_2_73b	""""""	add integer prompt	Number of months	
 adultModule-adult2-adult_2_74	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10214')	add select one prompt using yesno	Did ${gen_5_0} experience a period of loss of consciousness?	
-adultModule-adult2-adult_2_75	map_code(c('yes','no'),c(1,2),'Id10217')	add select one prompt using startspeed	Did the period of loss of consciousness start suddenly or slowly?	
+adultModule-adult2-adult_2_75	map_code(c('yes','no','dk','ref'),c(1,2,9,8),'Id10217')	add select one prompt using startspeed	Did the period of loss of consciousness start suddenly or slowly?	
 adultModule-adult2-adult_2_77	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10218')	add select one prompt using yesno	Did it continue until death?	
 adultModule-adult2-adult_2_82	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10219')	add select one prompt using yesno	Did ${gen_5_0} have convulsions?	
 adultModule-adult2-adult_2_83	ifelse(t_adult_2_82==1,6,'')	add select one prompt using minuteHourNoAnswer	For how long before death did the convulsions last?	
@@ -229,12 +229,12 @@ childModule-child_1_a	""""""	add note prompt	Background Section
 childModule-Child1-child_1_3	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10356')	add select one prompt using yesno	Is the mother still alive?	
 childModule-Child1-child_1_4	map_code(c('during_delivery','after_delivery'),c(1,2),'Id10357')	add select one prompt using duringAfter	Did the mother die during or after the delivery?	
 childModule-Child1-motherDieDuringAfterDeliveryGroup-child_1_5	ifelse (t_child_1_4,4,'')	add select one prompt using monthDayNoAnswer	How long after the delivery did the mother die?	
-childModule-Child1-motherDieDuringAfterDeliveryGroup-child_1_5a	Id10358	add integer prompt	Days	
-childModule-Child1-motherDieDuringAfterDeliveryGroup-child_1_5b	Id10359	add integer prompt	Months	
+childModule-Child1-motherDieDuringAfterDeliveryGroup-child_1_5a	as.integer(Id10358)*30.4 + as.integer(Id10359)	add integer prompt	Days	
+childModule-Child1-motherDieDuringAfterDeliveryGroup-child_1_5b	""""""	add integer prompt	Months	
 childModule-Child1-child_1_6	map_code(c('hospital','other_health_facility','home','on_route_to_hospital_or_facility','other','DK','Ref'),c(1,2,4,3,5,9,8),'Id10360')	add select one prompt using birthPlace	Where was the deceased born?	
 childModule-Child1-child_1_6a	""""""	add text prompt	Where was the deceased born? [other location, specified]	
 childModule-Child1-birthWeightDetails-child_1_8	ifelse (t_neonate, 1, '')	add select one prompt using weightNoAnswer	What was the weight of the deceased at birth?	
-childModule-Child1-birthWeightDetails-child_1_8a	Id10366	add integer prompt	Grams	
+childModule-Child1-birthWeightDetails-child_1_8a	ifelse(as.integer(Id10366)==8888,9999,Id10366)	add integer prompt	Grams	
 childModule-Child1-birthWeightDetails-child_1_8b	""""""	add integer prompt	Kilograms	
 childModule-Child1-child_1_7	yes_to_code(c('Id10362','Id10363','Id10364','Id10365'),c(3,2,1,4),'9')	add select one prompt using birthSize	At the time of the delivery what was the size of the deceased? (Read the question and slowly read the first 4 choices. Respondent should hear all four choices and then respond.)	
 childModule-Child1-child_1_11	map_code(c('yes','no','dk','ref'),c(2,1,9,8),'Id10114')	add select one prompt using aliveDead	Was the baby born alive or dead?	
@@ -255,7 +255,7 @@ childModule-Child1-ageIllnessStartDetails-child_1_20a	Id10351	add integer prompt
 childModule-Child1-ageIllnessStartDetails-child_1_20b	""""""	add integer prompt	Months	
 childModule-Child1-ageIllnessStartDetails-child_1_20c	Id10352	add integer prompt	Years	
 childModule-Child1-illnessDurationDetails-child_1_21	ifelse(t_child_1_15b, 4, '')	add select one prompt using monthDayNoAnswer	How long did the illness last? 	
-childModule-Child1-illnessDurationDetails-child_1_21a	Id10120	add integer prompt	Days	
+childModule-Child1-illnessDurationDetails-child_1_21a	as.integer(Id10121)*30.4 + as.integer(Id10122)*7 + as.integer(Id10120)	add integer prompt	Days	
 childModule-Child1-illnessDurationDetails-child_1_21b	""""""	add integer prompt	Months	
 childModule-Child1-child_1_25	ifelse(t_child, 4, '')	add select one prompt using yearMonthDayNoAnswer	How old was the deceased at the time of death?	
 childModule-Child1-child_1_25a	ifelse(t_child,t_agedays, '')	add integer prompt	Days	
@@ -264,14 +264,14 @@ childModule-Child1-child_1_25c	""""""	add integer prompt	Years
 childModule-Child1-child_1_26	ifelse (t_neonate==1,1,2)	add calculate prompt	Mark the baby's age at the time of death	
 childModule-Child1-child_2_a	""""""	add note prompt	Maternal History Section	
 childModule-Child1-Child2-child_2_1	yes_to_code(c('Id10399','Id10396','Id10401','Id10397','Id10403','Id10405','Id10404','Id10402','Id10395'),c(1,2,3,4,5,6,7,8,9),10)	add select multiple prompt using complications	Was the late part of the pregnancy (defined as the last 3 months), labor, or delivery complicated by any of the following problems?	
-childModule-Child1-Child2-child_2_4	map_code(c('yes','no','dk','ref'),c(0,1,9,8),'Id10377')	add select one prompt using yesno	Was the baby moving in the last few days before the birth? 	
+childModule-Child1-Child2-child_2_4	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10377')	add select one prompt using yesno	Was the baby moving in the last few days before the birth? 	
 childModule-Child1-Child2-child_2_8	map_code(c('green_or_brown','clear','other','dk','ref'),c(1,2,3,9,8),'Id10385')	add select one prompt using waterColor	What was the color of the liquor when the water broke? 	
 childModule-Child1-Child2-child_2_8a	""""""	add text prompt	What was the color of the liquor when the water broke? [other location, specified]	
 childModule-Child1-Child2-child_2_10	ifelse (t_neonate==1,  5, '')	add select one prompt using hourNoAnswer	How much time did the labor and delivery take?	
 childModule-Child1-Child2-child_2_10a	Id10382	add integer prompt	Hours	
 childModule-Child1-Child2-child_2_15	""""""	add select one prompt using birthWho	Who delivered the baby?	
 childModule-Child1-Child2-child_2_15a	""""""	add text prompt	Who delivered the baby? [other person, specified]	
-childModule-Child1-Child2-child_2_17	yes_to_code(c('Id10342','Id10343','Id10344'),c(1,2,4),9)	add select one prompt using deliveryType	Was the delivery … ? 	
+childModule-Child1-Child2-child_2_17	yes_to_code(c('Id10342','Id10343','Id10344'),c(2,1,4),9)	add select one prompt using deliveryType	Was the delivery … ? 	
 childModule-Child1-child_3_a	""""""	add note prompt	Neonatal Deaths Section	
 childModule-Child1-Child3-child_3_2	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10370')	add select one prompt using yesno	Was any part of the baby physically abnormal at time of delivery?	
 childModule-Child1-Child3-child_3_3	yes_to_code(c('Id10373','Id10372','Id10371'),c(1,2,3),'')	add select multiple prompt using abnormalities	What were the abnormalities?  (Mark all that apply)	
@@ -295,7 +295,7 @@ childModule-Child1-Child3-child_3_29	map_code(c('yes','no','dk','ref'),c(1,0,9,8
 childModule-Child1-Child3-child_3_30	ifelse(t_child_3_29,4,'')	add select one prompt using dayNoAnswer	At what age did the baby start feeling cold to touch? 	
 childModule-Child1-Child3-child_3_30a	Id10285	add integer prompt	Days	
 childModule-Child1-Child3-child_3_32	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10286')	add select one prompt using yesno	During the illness that led to death, did the baby become lethargic, after a period of normal activity?	
-childModule-Child1-Child3-child_3_33	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10282')	add select one prompt using yesno	During the illness that led to death, did the baby become unresponsive or unconscious? 	
+childModule-Child1-Child3-child_3_33	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10281')	add select one prompt using yesno	During the illness that led to death, did the baby become unresponsive or unconscious? 	
 childModule-Child1-Child3-child_3_35	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10287')	add select one prompt using yesno	During the illness that led to death, did the baby have pus drainage from the umbilical cord stump? 	
 childModule-Child1-Child3-child_3_40	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10240')	add select one prompt using yesno	During the illness that led to death, did the baby have an area(s) of skin with redness and swelling?	
 childModule-Child1-Child3-child_3_47	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10289')	add select one prompt using yesno	During the illness that led to death, did he/she have yellow skin?	
@@ -324,7 +324,7 @@ childModule-Child1-Child4-breathingdetails-child_4_20	map_code(c('yes','no','dk'
 childModule-Child1-Child4-breathingdetails-child_4_23	"ifelse (multi_select_contains(""grunting"",Id10173), '1', '0')"	add select one prompt using yesno	Grunting	
 childModule-Child1-Child4-child_4_25	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10220')	add select one prompt using yesno	Did ${gen_5_0} experience any generalized convulsions or fits during the illness that led to death? 	
 childModule-Child1-Child4-child_4_26	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10214')	add select one prompt using yesno	Was ${gen_5_0} unconscious during the illness that led to death?	
-childModule-Child1-Child4-child_4_27	range_to_code(c(0,5,23,9999),c(1,2,3),9,'Id10216')	add select one prompt using unconstart	How long before death did unconsciousness start?	
+childModule-Child1-Child4-child_4_27	range_to_code(c(-1,5,23,9999),c(1,2,3),9,'Id10216')	add select one prompt using unconstart	How long before death did unconsciousness start?	
 childModule-Child1-Child4-child_4_28	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10208')	add select one prompt using yesno	Did ${gen_5_0} have a stiff neck during the illness that led to death? (show photo)	
 childModule-Child1-Child4-child_4_29	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10278')	add select one prompt using yesno	Did ${gen_5_0} have a bulging fontanelle during the illness that led to death? (show photo)	
 childModule-Child1-Child4-child_4_30	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10233')	add select one prompt using yesno	During the month before he/she died, did ${gen_5_0} have a skin rash? 	
@@ -341,7 +341,7 @@ child_5_a	""""""	add note prompt	Health Records Section
 Child5-child_5_0a	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10435')	add select one prompt using yesno	Did a health care worker tell you the cause of death?	
 Child5-child_5_0b	Id10436	add text prompt	What did the health care worker say?	
 Child5-child_5_1	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10432')	add select one prompt using yesno	Was care sought outside the home while ${gen_5_0} had this illness?	
-Child5-child_5_2	map_code(c('traditional_healer','homeopath','religious_leader','government_hospital','government_health_center_or_clinic','private_hospital','community_based_practitioner_associated_with_health_system','trained_birth_attendant','private_physician','pharmacy','dk','ref'),c(1,2,3,4,5,6,7,8,9,10,99,88),'Id10433')	add select multiple prompt using provider	Where or from whom did you seek care? (Check all that apply)	
+Child5-child_5_2	map_code(c('traditional_healer','homeopath','religious_leader','government_hospital','government_health_center_or_clinic','private_hospital','community_based_practitionerinsystem','trained_birth_attendant','private_physician','pharmacy','relative_friend','dk','ref'),c(1,2,3,4,5,6,7,8,9,10,12,99,88),'Id10433')	add select multiple prompt using provider	Where or from whom did you seek care? (Check all that apply)	
 Child5-child_5_3	Id10434	add text prompt	Record the name and address of any hospital, health center or clinic where care was sought:	
 Child5-child_5_4	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10437')	add select one prompt using yesno	Do you have any health records that belonged to the deceased? 	
 Child5-child_5_5	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10438')	add select one prompt using yesno	Can I see the health records? 	
@@ -366,7 +366,7 @@ Child5-lastNoteChild-child_5_8b	get_month(Id10441)	add integer prompt	Month
 Child5-lastNoteChild-child_5_8c	get_day(Id10441)	add integer prompt	Day of the month	
 Child5-child_5_9	Id10444	add text prompt	Transcribe the note:	
 Child5-qDeathCertsChild-child_5_10	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10462')	add select one prompt using yesno	Was a death certificate issued?	
-Child5-qDeathCertsChild-child_5_11	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10463')	add select one prompt using yesnorefuse	Can I see the death certificate? 	
+Child5-qDeathCertsChild-child_5_11	map_code(c('yes','no','ref'),c(1,0,8),'Id10463')	add select one prompt using yesnorefuse	Can I see the death certificate? 	
 Child5-qDeathCertsChild-child_5_11b	""""""	add select multiple prompt using certs	Mark all Cause of Death information that is known	
 Child5-qDeathCertsChild-child_5_12	Id10464	add text prompt	Record the immediate cause of death from the certificate.	
 Child5-qDeathCertsChild-child_5_13	Id10466	add text prompt	Record the first underlying cause of death from the certificate.	
