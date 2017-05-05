@@ -219,7 +219,7 @@ adult6-qhealthrecordsAdult-lastNoteAdult-adult_6_7c	get_day(Id10441)	add integer
 adult6-qhealthrecordsAdult-lastNoteAdult-adult_6_8	Id10444	add text prompt	Transcribe the note:	
 adult6-adult_6_9	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10462')	add select one prompt using yesno	Was a death certificate issued?	
 adult6-adult_6_10	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10463')	add select one prompt using yesnorefuse	Can I see the death certificate? 	
-adult6-qDeathCertsAdult-adult_6_10b	""""""	add select multiple prompt using certs	Mark all Cause of Death information that is known	
+adult6-qDeathCertsAdult-adult_6_10b	map_to_multi(c('Id10464', 'Id10466', 'Id10468', 'Id10470','Id10472'),c(1,2,3,4,5))	add select multiple prompt using certs	Mark all Cause of Death information that is known	
 adult6-qDeathCertsAdult-adult_6_11	Id10464	add text prompt	Record the immediate cause of death from the certificate.	
 adult6-qDeathCertsAdult-adult_6_12	Id10466	add text prompt	Record the first underlying cause of death from the certificate.	
 adult6-qDeathCertsAdult-adult_6_13	Id10468	add text prompt	Record the second underlying cause of death from the certificate.	
@@ -268,8 +268,8 @@ childModule-Child1-Child2-child_2_4	map_code(c('yes','no','dk','ref'),c(1,0,9,8)
 childModule-Child1-Child2-child_2_8	map_code(c('green_or_brown','clear','other','dk','ref'),c(1,2,3,9,8),'Id10385')	add select one prompt using waterColor	What was the color of the liquor when the water broke? 	
 childModule-Child1-Child2-child_2_8a	""""""	add text prompt	What was the color of the liquor when the water broke? [other location, specified]	
 childModule-Child1-Child2-child_2_10	ifelse (t_neonate==1,  5, '')	add select one prompt using hourNoAnswer	How much time did the labor and delivery take?	
-childModule-Child1-Child2-child_2_10a	Id10382	add integer prompt	Hours	
-childModule-Child1-Child2-child_2_15	""""""	add select one prompt using birthWho	Who delivered the baby?	
+childModule-Child1-Child2-child_2_10a	"ifelse(Id10382=="""",99,Id10382)"	add integer prompt	Hours	
+childModule-Child1-Child2-child_2_15	map_code(c('Doctor','Midwife','Nurse','Relative','Self_mother','Traditional_birth_attendant','Other','DK','ref'),c(1,2,2,3,4,5,6,9,8),'Id10339')	add select one prompt using birthWho	Who delivered the baby?	
 childModule-Child1-Child2-child_2_15a	""""""	add text prompt	Who delivered the baby? [other person, specified]	
 childModule-Child1-Child2-child_2_17	yes_to_code(c('Id10342','Id10343','Id10344'),c(2,1,4),9)	add select one prompt using deliveryType	Was the delivery … ? 	
 childModule-Child1-child_3_a	""""""	add note prompt	Neonatal Deaths Section	
@@ -280,7 +280,7 @@ childModule-Child1-Child3-child_3_4	map_code(c('yes','no','dk','ref'),c(1,0,9,8)
 childModule-Child1-Child3-child_3_5	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10112')	add select one prompt using yesno	Did the baby have difficulty breathing?	
 childModule-Child1-Child3-child_3_6	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10113')	add select one prompt using yesno	Was anything done to try to help the baby breathe at birth? 	
 childModule-Child1-Child3-child_3_7	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10182')	add select one prompt using yesno	Did the baby cry immediately after birth? 	
-childModule-Child1-Child3-child_3_8	range_to_code(c(0,5,30,9999),c(1,2,3),9,'Id10106')	add select one prompt using afterBirthCry	How long after birth did the baby first cry?  (MARK ONE)	
+childModule-Child1-Child3-child_3_8	range_to_code(c(-1,5,30,998,999),c(1,2,3,4),9,'Id10106')	add select one prompt using afterBirthCry	How long after birth did the baby first cry?  (MARK ONE)	
 childModule-Child1-Child3-child_3_9	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10107')	add select one prompt using yesno	Did the baby stop being able to cry? 	
 childModule-Child1-Child3-child_3_11	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10271')	add select one prompt using yesno	Was the baby able to suckle in a normal way during the first day of life?	
 childModule-Child1-Child3-child_3_12	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10272')	add select one prompt using yesno	Did the baby ever suckle in a normal way? 	
@@ -302,12 +302,12 @@ childModule-Child1-Child3-child_3_47	map_code(c('yes','no','dk','ref'),c(1,0,9,8
 childModule-Child1-Child3-child_3_49	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10290')	add select one prompt using yesno	Did the infant appear to be healthy and then just die suddenly? 	
 childModule-Child1-child_4_a	""""""	add note prompt	Child Deaths Section	
 childModule-Child1-Child4-child_4_1	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10147')	add select one prompt using yesno	During the illness that led to death, did he/she have a fever? 	
-childModule-Child1-Child4-child_4_2	ifelse (t_child_4_1, 2, '')	add select one prompt using feverDuration	How many days did the fever last?	
+childModule-Child1-Child4-child_4_2	range_to_code(c(-1,0,9999),c(1,2),9,'Id10148')	add select one prompt using feverDuration	How many days did the fever last?	
 childModule-Child1-Child4-child_4_2a	Id10148	add integer prompt	Number of days (specify)	
 childModule-Child1-Child4-child_4_3	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10149')	add select one prompt using yesno	Did the fever continue until death?	
 childModule-Child1-Child4-child_4_4	map_code(c('mild','moderate','severe'),c(1,2,3),'Id10150')	add select one prompt using severity	How severe was the fever?	
 childModule-Child1-Child4-child_4_6	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10181')	add select one prompt using yesno	During the illness that led to death, did ${gen_5_0} have more frequent loose or liquid stools than usual? 	
-childModule-Child1-Child4-child_4_7	yes_to_code(c('Id10181'),c(1),'')	add select one prompt using stools	How many stools did ${gen_5_0} have on the day that loose liquid stools were most frequent?	
+childModule-Child1-Child4-child_4_7	ifelse(t_child_4_6,1,'')	add select one prompt using stools	How many stools did ${gen_5_0} have on the day that loose liquid stools were most frequent?	
 childModule-Child1-Child4-child_4_7a	Id10183	add integer prompt	Stools	
 childModule-Child1-Child4-child_4_9	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10185')	add select one prompt using yesno	Did the frequent loose or liquid stools continue until death?	
 childModule-Child1-Child4-child_4_12	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10153')	add select one prompt using yesno	During the illness that led to death, did the child have a cough?	
@@ -350,14 +350,14 @@ Child5-recent1Child-child_5_6a	""""""	add note prompt	Record the date of the mos
 Child5-recent1Child-child_5_6b	get_year(Id10439)	add integer prompt	Year	
 Child5-recent1Child-child_5_6c	get_month(Id10439)	add integer prompt	Month	
 Child5-recent1Child-child_5_6d	get_day(Id10439)	add integer prompt	Day of the month	
-Child5-child_5_6e	ifelse (t_child_5_6a, 2, '')	add select one prompt using weightNoAnswer	Record the weight on the most recent visit	
+Child5-child_5_6e	ifelse (t_child_5_6a, 2, 9)	add select one prompt using weightNoAnswer	Record the weight on the most recent visit	
 Child5-child_5_6f	""""""	add integer prompt	Grams	
 Child5-child_5_6g	Id10442	add integer prompt	Kilograms	
 Child5-recent2Child-child_5_7a	""""""	add note prompt	Record the date of the second most recent visit	
 Child5-recent2Child-child_5_7b	get_year(Id10440)	add integer prompt	Year	
 Child5-recent2Child-child_5_7c	get_month(Id10440)	add integer prompt	Month	
 Child5-recent2Child-child_5_7d	get_day(Id10440)	add integer prompt	Day of the month	
-Child5-child_5_7e	ifelse (t_child_5_7a, 2, '')	add select one prompt using weightNoAnswer	Record the weight on the second most recent visit	
+Child5-child_5_7e	ifelse (t_child_5_7a, 2, 9)	add select one prompt using weightNoAnswer	Record the weight on the second most recent visit	
 Child5-child_5_7f	""""""	add integer prompt	Grams	
 Child5-child_5_7g	Id10443	add integer prompt	Kilograms	
 Child5-lastNoteChild-child_5_8	""""""	add note prompt	Record the date of the last note	
@@ -367,14 +367,14 @@ Child5-lastNoteChild-child_5_8c	get_day(Id10441)	add integer prompt	Day of the m
 Child5-child_5_9	Id10444	add text prompt	Transcribe the note:	
 Child5-qDeathCertsChild-child_5_10	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10462')	add select one prompt using yesno	Was a death certificate issued?	
 Child5-qDeathCertsChild-child_5_11	map_code(c('yes','no','ref'),c(1,0,8),'Id10463')	add select one prompt using yesnorefuse	Can I see the death certificate? 	
-Child5-qDeathCertsChild-child_5_11b	""""""	add select multiple prompt using certs	Mark all Cause of Death information that is known	
+Child5-qDeathCertsChild-child_5_11b	map_to_multi(c('Id10464', 'Id10466', 'Id10468', 'Id10470','Id10472'),c(1,2,3,4,5))	add select multiple prompt using certs	Mark all Cause of Death information that is known	
 Child5-qDeathCertsChild-child_5_12	Id10464	add text prompt	Record the immediate cause of death from the certificate.	
 Child5-qDeathCertsChild-child_5_13	Id10466	add text prompt	Record the first underlying cause of death from the certificate.	
 Child5-qDeathCertsChild-child_5_14	Id10468	add text prompt	Record the second underlying cause of death from the certificate.	
 Child5-qDeathCertsChild-child_5_15	Id10470	add text prompt	Record the third underlying cause of death from the certificate.	
 Child5-qDeathCertsChild-child_5_16	Id10472	add text prompt	Record the contributing cause(s) of death from the certificate.	
 Child5-HIVtest-child_5_17	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10445')	add select one prompt using yesno	Has the deceased's (biological) mother ever been tested for HIV? 	
-Child5-HIVtest-child_5_18	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10446')	add select one prompt using yesno	Was the HIV test ever positive? 	
+Child5-HIVtest-child_5_18	9	add select one prompt using yesno	Was the HIV test ever positive? 	
 Child5-HIVtest-child_5_19	map_code(c('yes','no','dk','ref'),c(1,0,9,8),'Id10446')	add select one prompt using yesno	Has the deceased's (biological) mother ever been told she had AIDS by a health worker? 	
 adult7-adult_7_a	""""""	add note prompt	"Instructions to the interviewer: Say to the respondent: ""Thank you for the patient responses to this exhaustive set of questions. Could you please summarize, or tell us in your own words, any additional information about the illness and/or death of your loved one?"""	
 adult7-adult_7_b	""""""	add note prompt	"To the interviewer: Listen to what the respondent tells you in his/her own words. Do not prompt except for asking whether there was anything else after the respondent finishes. If the respondent mentions any of the following words, mark ""mentioned"".  Tell the respondent to stop and start again if they mention a word of interest, so you have time to mark it down."	

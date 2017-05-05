@@ -117,9 +117,22 @@ map_code <- function(from_list, to_list, who_id) {
 #Create ODK-style muli-select answer (chosen options listed separated by space)
 map_multi_code <- function(from_list, to_list, who_id) {
   code <- ""
-  values <- strsplit(as.character(get(who_id)), " ")[[1]]
+  values <- strsplit(as.character(get(who_id), envir = xda_env), " ")[[1]]
   for (i in 1:length(from_list)) {
     if (any(from_list[i] == values)) {
+      code <- paste(code, to_list[i])
+    }
+  }
+  # leave empty if no match
+  return(trimws(code))
+}
+
+
+#Create ODK-style muli-select answer (chosen options listed separated by space)
+map_to_multi <- function(from_who_list, to_list) {
+  code <- ""
+  for (i in 1:length(from_who_list)) {
+    if (get(from_who_list[i], envir = xda_env) != "") {
       code <- paste(code, to_list[i])
     }
   }
