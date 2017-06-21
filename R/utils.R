@@ -42,6 +42,16 @@ any_to_empty <- function(expressions) {
   }
 }
 
+#get if exists, return default otherwise
+g_or_d <- function(var_name, default = ""){
+  #print(var_name)
+  value <- get(var_name, envir = xda_env)
+  if (is.na(value)){
+    return(default)
+  }
+  return(value)
+}
+
 # evaluate expression, return default on empty
 exp_def <- function(expr, default) {
   value<-""
