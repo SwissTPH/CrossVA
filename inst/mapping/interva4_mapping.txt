@@ -216,7 +216,7 @@ O_TRANS	true_to_y(Id10082 == 'yes')	Was (s)he Injured in a non?road transport ac
 FALL	true_to_y(Id10077 == 'yes' && Id10083 == 'yes')	Was (s)he Injured in a fall?	Was (s)he injured in a fall?		5030
 DROWN	true_to_y(Id10077 == 'yes' && Id10085 == 'yes')	Did (s)he die of drowning?	Did (s)he die of drowning?		5040
 FIRE	true_to_y(Id10077 == 'yes' && Id10089 == 'yes')	Did (s)he suffer from burns?	Did (s)he suffer from accidental burns?		5050
-ASSAULT	any_to_y(c(Id10090 == 'yes', Id10091 == 'yes', Id10092 == 'yes', Id10093 == 'yes', Id10094))	Was (s)he subject to violence/assault?	Was (s)he subject to violence/assault?		5060
+ASSAULT	any_to_y(c(Id10090 == 'yes', Id10091 == 'yes', Id10092 == 'yes', Id10093 == 'yes', Id10094 == 'yes'))	Was (s)he subject to violence/assault?	Was (s)he subject to violence/assault?		5060
 VENOM	any_to_y(c(Id10086 == 'yes', Id10087 == 'yes'))	Did (s)he suffer from any plant/animal/insect bite or sting that led to her/his death?	Was (s)he accidentally injured by a plant/animal/insect that led to her/his death?		5070
 FORCE	true_to_y(Id10077 == 'yes' && Id10095 == 'yes')	Was (s)he injured by a force of nature	Was (s)he injured by a force of nature?		5080
 POISON	true_to_y(Id10077 == 'yes' && Id10084 == 'yes')	Was there any poisoning?	Was there any poisoning?		5090
