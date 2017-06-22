@@ -16,7 +16,7 @@ true_to_y_dot <- function(expr) {
     return(".")
   }
   if (value == TRUE) {
-    return("Y")
+    return("y")
   }
   if (value == FALSE) {
     return("")
