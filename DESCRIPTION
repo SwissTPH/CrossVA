@@ -1,7 +1,7 @@
 Package: CrossVA
 Type: Package
 Title: Verbal Autopsy Data Transform for Use with Various Coding Algorithms
-Version: 0.9.0
+Version: 0.9.1
 Authors@R: person("Nicolas", "Maire", email = "nicolas.maire@unibas.ch", role = c("aut", "cre"))
 Description: Enables transformation of Verbal Autopsy data collected with the WHO 2016 questionnaire
   for automated coding of Cause of Death using different computer algorithms. Currently supports user-supplied mappings,
@@ -10,5 +10,5 @@ Description: Enables transformation of Verbal Autopsy data collected with the WH
 License: GPL-2
 Depends: R (>= 3.2.0)
 LazyData: TRUE
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 Imports: lubridate

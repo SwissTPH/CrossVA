@@ -9,17 +9,19 @@ true_to_y <- function(expr) {
   }
 }
 
-# map true to character 'y', or return "." if the expression cannot be evaluated because of an NA
+# map TRUE to character 'y', FALSE to '',  or return '.' if the expression cannot be evaluated because of an NA
 true_to_y_dot <- function(expr) {
-  value<-"."
   try(value<-eval(parse(text = expr), envir = xda_env))
-  if (is.na(value) || value == "."){
+  if (is.na(value)){
     return(".")
   }
   if (value == TRUE) {
     return("Y")
-  } 
-  return("")
+  }
+  if (value == FALSE) {
+    return("")
+  }
+  return(".")
 }
 
 # return 'y' if any of the strings evaluates to TRUE, return "" for everything else
